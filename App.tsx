@@ -32,6 +32,130 @@ const App: React.FC = () => {
         position: 'relative'
       }}
     >
+      {/* 草ブロックレイヤー */}
+      <div className="grass-layer" style={{
+        position: 'fixed',
+        top: '25vh',
+        left: 0,
+        right: 0,
+        height: '18.75vh',
+        zIndex: -3,
+        backgroundImage: `
+          repeating-linear-gradient(
+            0deg,
+            rgba(34, 139, 34, 0.7) 0px,
+            rgba(34, 139, 34, 0.7) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(34, 139, 34, 0.7) 0px,
+            rgba(34, 139, 34, 0.7) 2px,
+            transparent 2px,
+            transparent 32px
+          )`,
+        backgroundSize: '32px 32px, 32px 32px'
+      }} />
+      
+      {/* 土ブロックレイヤー */}
+      <div className="dirt-layer" style={{
+        position: 'fixed',
+        top: '43.75vh',
+        left: 0,
+        right: 0,
+        height: '18.75vh',
+        zIndex: -4,
+        backgroundImage: `
+          repeating-linear-gradient(
+            0deg,
+            rgba(139, 115, 85, 0.8) 0px,
+            rgba(139, 115, 85, 0.8) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(139, 115, 85, 0.8) 0px,
+            rgba(139, 115, 85, 0.8) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          repeating-linear-gradient(
+            60deg,
+            rgba(160, 82, 45, 0.3),
+            rgba(160, 82, 45, 0.3) 1px,
+            transparent 1px,
+            transparent 8px
+          )`,
+        backgroundSize: '32px 32px, 32px 32px, 16px 16px'
+      }} />
+      
+      {/* 石ブロックレイヤー */}
+      <div className="stone-layer" style={{
+        position: 'fixed',
+        top: '62.5vh',
+        left: 0,
+        right: 0,
+        height: '18.75vh',
+        zIndex: -5,
+        backgroundImage: `
+          repeating-linear-gradient(
+            0deg,
+            rgba(105, 105, 105, 0.9) 0px,
+            rgba(105, 105, 105, 0.9) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(105, 105, 105, 0.9) 0px,
+            rgba(105, 105, 105, 0.9) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          repeating-linear-gradient(
+            45deg,
+            rgba(169, 169, 169, 0.5),
+            rgba(169, 169, 169, 0.5) 1px,
+            transparent 1px,
+            transparent 8px
+          )`,
+        backgroundSize: '32px 32px, 32px 32px, 16px 16px'
+      }} />
+      
+      {/* 深い石ブロックレイヤー */}
+      <div className="deep-stone-layer" style={{
+        position: 'fixed',
+        top: '81.25vh',
+        left: 0,
+        right: 0,
+        height: '18.75vh',
+        zIndex: -6,
+        backgroundImage: `
+          repeating-linear-gradient(
+            0deg,
+            rgba(47, 47, 47, 0.9) 0px,
+            rgba(47, 47, 47, 0.9) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(47, 47, 47, 0.9) 0px,
+            rgba(47, 47, 47, 0.9) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          repeating-linear-gradient(
+            135deg,
+            rgba(85, 85, 85, 0.4),
+            rgba(85, 85, 85, 0.4) 1px,
+            transparent 1px,
+            transparent 6px
+          )`,
+        backgroundSize: '32px 32px, 32px 32px, 12px 12px'
+      }} />
       {/* 雲のレイヤー - 背景の青い部分のみ、パネルの後ろ */}
       <div 
         style={{
@@ -618,11 +742,11 @@ const App: React.FC = () => {
       
 
       
-      {/* 土・石ブロックテクスチャのレイヤー（青い空の部分を除く） */}
+      {/* 土・石ブロックテクスチャのレイヤー（草の部分も除く） */}
       <div 
         style={{
           position: 'fixed',
-          top: '25%', // 青い空の部分（上部25%）を除外
+          top: '43.75vh', // 草の部分（25%から43.75%）も除外し、土の部分から開始
           left: 0,
           right: 0,
           bottom: 0,

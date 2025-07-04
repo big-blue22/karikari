@@ -26,6 +26,88 @@
         min-height: 100vh;
       }
       
+      /* 草ブロックグリッド */
+      .minecraft-world::after {
+        content: '';
+        position: fixed;
+        top: 25vh; /* 草の領域開始位置 */
+        left: 0;
+        right: 0;
+        height: 18.75vh; /* 草の領域の高さ（25%から43.75%まで） */
+        z-index: -3;
+        background-image:
+          /* 32pxの固定グリッド */
+          repeating-linear-gradient(
+            0deg,
+            rgba(34, 139, 34, 0.7) 0px,
+            rgba(34, 139, 34, 0.7) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(34, 139, 34, 0.7) 0px,
+            rgba(34, 139, 34, 0.7) 2px,
+            transparent 2px,
+            transparent 32px
+          );
+        background-size: 32px 32px, 32px 32px;
+      }
+      
+      .minecraft-world::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -2;
+        background-image: 
+          /* より大きく目立つ雲 */
+          radial-gradient(ellipse at 20% 15%, rgba(255,255,255,0.9) 30px, rgba(255,255,255,0.5) 50px, transparent 70px),
+          radial-gradient(ellipse at 80% 10%, rgba(255,255,255,0.8) 40px, rgba(255,255,255,0.4) 60px, transparent 80px),
+          radial-gradient(ellipse at 40% 20%, rgba(255,255,255,0.7) 25px, rgba(255,255,255,0.3) 45px, transparent 65px),
+          radial-gradient(ellipse at 60% 8%, rgba(255,255,255,0.6) 35px, rgba(255,255,255,0.2) 55px, transparent 75px);
+        background-size: 500px 300px, 400px 250px, 300px 200px, 350px 220px;
+        animation: clouds 30s linear infinite;
+      }
+      
+      /* 土ブロックグリッド */
+      .dirt-layer {
+        content: '';
+        position: fixed;
+        top: 43.75vh; /* 土の領域開始位置 */
+        left: 0;
+        right: 0;
+        height: 18.75vh; /* 土の領域の高さ（43.75%から62.5%まで） */
+        z-index: -4;
+        background-image:
+          /* 32pxの固定グリッド */
+          repeating-linear-gradient(
+            0deg,
+            rgba(139, 115, 85, 0.8) 0px,
+            rgba(139, 115, 85, 0.8) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(139, 115, 85, 0.8) 0px,
+            rgba(139, 115, 85, 0.8) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          /* 土のテクスチャ */
+          repeating-linear-gradient(
+            60deg,
+            rgba(160, 82, 45, 0.3),
+            rgba(160, 82, 45, 0.3) 1px,
+            transparent 1px,
+            transparent 8px
+          );
+        background-size: 32px 32px, 32px 32px, 16px 16px;
+      }
+      
       .minecraft-world::before {
         content: '';
         position: fixed;
@@ -62,40 +144,76 @@
       }
       
       /* 石ブロック専用の固定グリッド */
-      .minecraft-world::before {
+      .stone-layer {
         content: '';
         position: fixed;
-        top: 65vh; /* 石の領域開始位置 */
+        top: 62.5vh; /* 石の領域開始位置 */
         left: 0;
         right: 0;
-        height: 20vh; /* 石の領域の高さ（65%から85%まで） */
-        z-index: -1;
+        height: 18.75vh; /* 石の領域の高さ（62.5%から81.25%まで） */
+        z-index: -5;
         background-image:
           /* 32pxの完全に固定されたグリッド */
           repeating-linear-gradient(
             0deg,
-            rgba(105, 105, 105, 0.6) 0px,
-            rgba(105, 105, 105, 0.6) 2px,
+            rgba(105, 105, 105, 0.9) 0px,
+            rgba(105, 105, 105, 0.9) 2px,
             transparent 2px,
             transparent 32px
           ),
           repeating-linear-gradient(
             90deg,
-            rgba(105, 105, 105, 0.6) 0px,
-            rgba(105, 105, 105, 0.6) 2px,
+            rgba(105, 105, 105, 0.9) 0px,
+            rgba(105, 105, 105, 0.9) 2px,
             transparent 2px,
             transparent 32px
           ),
           /* 石のテクスチャ */
           repeating-linear-gradient(
             45deg,
-            rgba(169, 169, 169, 0.3),
-            rgba(169, 169, 169, 0.3) 1px,
+            rgba(169, 169, 169, 0.5),
+            rgba(169, 169, 169, 0.5) 1px,
             transparent 1px,
             transparent 8px
           );
         background-size: 32px 32px, 32px 32px, 16px 16px;
         /* アニメーションなし - 完全に固定 */
+      }
+      
+      /* 深い石ブロック */
+      .deep-stone-layer {
+        content: '';
+        position: fixed;
+        top: 81.25vh; /* 深い石の領域開始位置 */
+        left: 0;
+        right: 0;
+        height: 18.75vh; /* 深い石の領域の高さ（81.25%から100%まで） */
+        z-index: -6;
+        background-image:
+          /* 32pxの完全に固定されたグリッド */
+          repeating-linear-gradient(
+            0deg,
+            rgba(47, 47, 47, 0.9) 0px,
+            rgba(47, 47, 47, 0.9) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(47, 47, 47, 0.9) 0px,
+            rgba(47, 47, 47, 0.9) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          /* 深い石のテクスチャ */
+          repeating-linear-gradient(
+            135deg,
+            rgba(85, 85, 85, 0.4),
+            rgba(85, 85, 85, 0.4) 1px,
+            transparent 1px,
+            transparent 6px
+          );
+        background-size: 32px 32px, 32px 32px, 12px 12px;
       }
       
       @keyframes clouds {
@@ -183,7 +301,7 @@
 }
 </script>
 </head>
-  <body class="bg-gradient-to-b from-blue-400 via-green-400 to-green-600">
+  <body class="minecraft-world">
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
