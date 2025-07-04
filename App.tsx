@@ -32,23 +32,136 @@ const App: React.FC = () => {
         position: 'relative'
       }}
     >
-      {/* 雲のレイヤー */}
+      {/* 雲のレイヤー - 背景の青い部分のみ、パネルの後ろ */}
       <div 
         style={{
           position: 'fixed',
           top: 0,
           left: 0,
           right: 0,
-          bottom: 0,
-          zIndex: -2,
-          background: `
-            radial-gradient(ellipse at 20% 15%, rgba(255,255,255,0.9) 30px, rgba(255,255,255,0.5) 50px, transparent 70px),
-            radial-gradient(ellipse at 80% 10%, rgba(255,255,255,0.8) 40px, rgba(255,255,255,0.4) 60px, transparent 80px),
-            radial-gradient(ellipse at 40% 20%, rgba(255,255,255,0.7) 25px, rgba(255,255,255,0.3) 45px, transparent 65px)
-          `,
-          animation: 'cloudMove 30s linear infinite'
+          height: '25%', // 青い空の部分に合わせて調整
+          zIndex: 0, // パネルより前に表示してテスト
+          pointerEvents: 'none',
+          overflow: 'hidden'
         }}
-      />
+      >
+        {/* 雲1 - 見える位置に配置 */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '20px', // 確実に見える位置
+            left: '10%',
+            animation: 'cloudMove1 50s linear infinite',
+            filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
+          }}
+        >
+          <div style={{
+            position: 'relative',
+            width: '140px',
+            height: '70px'
+          }}>
+            <div style={{
+              position: 'absolute',
+              left: '15px',
+              top: '25px',
+              width: '70px',
+              height: '50px',
+              background: '#ffffff',
+              border: '2px solid #e0e0e0'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '50px',
+              top: '10px',
+              width: '80px',
+              height: '60px',
+              background: '#ffffff',
+              border: '2px solid #e0e0e0'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '90px',
+              top: '30px',
+              width: '60px',
+              height: '45px',
+              background: '#ffffff',
+              border: '2px solid #e0e0e0'
+            }} />
+          </div>
+        </div>
+
+        {/* 雲2 - 見える位置に配置 */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '40px', // 確実に見える位置
+            left: '60%',
+            animation: 'cloudMove2 40s linear infinite',
+            filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
+          }}
+        >
+          <div style={{
+            position: 'relative',
+            width: '110px',
+            height: '60px'
+          }}>
+            <div style={{
+              position: 'absolute',
+              left: '10px',
+              top: '20px',
+              width: '60px',
+              height: '45px',
+              background: '#ffffff',
+              border: '2px solid #e0e0e0'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '40px',
+              top: '5px',
+              width: '70px',
+              height: '55px',
+              background: '#ffffff',
+              border: '2px solid #e0e0e0'
+            }} />
+          </div>
+        </div>
+
+        {/* 雲3 - 見える位置に配置 */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '10px', // 確実に見える位置
+            left: '85%',
+            animation: 'cloudMove3 35s linear infinite',
+            filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
+          }}
+        >
+          <div style={{
+            position: 'relative',
+            width: '90px',
+            height: '50px'
+          }}>
+            <div style={{
+              position: 'absolute',
+              left: '10px',
+              top: '15px',
+              width: '50px',
+              height: '35px',
+              background: '#ffffff',
+              border: '2px solid #e0e0e0'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '35px',
+              top: '5px',
+              width: '55px',
+              height: '40px',
+              background: '#ffffff',
+              border: '2px solid #e0e0e0'
+            }} />
+          </div>
+        </div>
+      </div>
       
       {/* 草ブロックパターンのレイヤー */}
       <div 
@@ -122,9 +235,17 @@ const App: React.FC = () => {
       </div>
       
       <style>{`
-        @keyframes cloudMove {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(100px); }
+        @keyframes cloudMove1 {
+          0% { transform: translateX(-160px); }
+          100% { transform: translateX(calc(100vw + 160px)); }
+        }
+        @keyframes cloudMove2 {
+          0% { transform: translateX(-130px); }
+          100% { transform: translateX(calc(100vw + 130px)); }
+        }
+        @keyframes cloudMove3 {
+          0% { transform: translateX(-100px); }
+          100% { transform: translateX(calc(100vw + 100px)); }
         }
       `}</style>
     </div>
