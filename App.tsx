@@ -3,6 +3,8 @@ import Header from './Header';
 import KeyboardLayout from './KeyboardLayout';
 import { CommandList } from './CommandList';
 import { MINECRAFT_COMMANDS, COMMAND_CATEGORIES } from './constants';
+import BlockDamageSystem from './BlockDamage';
+import CanvasGrid from './CanvasGrid';
 
 export enum Tab {
   Keyboard = 'keyboard',
@@ -17,21 +19,29 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div 
-      className="min-h-screen p-4 sm:p-8"
-      style={{
-        background: `
-          linear-gradient(to bottom, 
-            #87CEEB 0%, #87CEEB 25%,
-            #7CB342 25%, #7CB342 45%,
-            #8D6E63 45%, #8D6E63 65%,
-            #616161 65%, #616161 98%,
-            #424242 98%
-          )`,
-        backgroundAttachment: 'fixed',
-        position: 'relative'
-      }}
-    >
+    <BlockDamageSystem>
+      {/* 完璧に同期されたCanvasグリッド */}
+      <CanvasGrid 
+        blockSize={32}
+        stoneAreaStart={62.5}
+        stoneAreaHeight={18.75}
+      />
+      
+      <div 
+        className="min-h-screen p-4 sm:p-8"
+        style={{
+          background: `
+            linear-gradient(to bottom, 
+              #87CEEB 0%, #87CEEB 25%,
+              #7CB342 25%, #7CB342 45%,
+              #8D6E63 45%, #8D6E63 65%,
+              #616161 65%, #616161 98%,
+              #424242 98%
+            )`,
+          backgroundAttachment: 'fixed',
+          position: 'relative'
+        }}
+      >
       {/* 雲のレイヤー - 背景の青い部分のみ、パネルの後ろ */}
       <div 
         style={{
@@ -879,7 +889,8 @@ const App: React.FC = () => {
           100% { transform: translateX(calc(100vw + 25px)) translateY(0px); }
         }
       `}</style>
-    </div>
+      </div>
+    </BlockDamageSystem>
   );
 };
 

@@ -18,10 +18,10 @@
       .minecraft-world {
         background: linear-gradient(to bottom, 
           #87CEEB 0%, #87CEEB 25%,    /* 空 */
-          #90EE90 25%, #90EE90 45%,   /* 草地 */
-          #8B7355 45%, #8B7355 65%,   /* 土 */
-          #696969 65%, #696969 85%,   /* 石 */
-          #2F2F2F 85%);               /* 深い石 */
+          #90EE90 25%, #90EE90 43.75%,   /* 草地 - 32pxグリッド境界に調整 */
+          #8B7355 43.75%, #8B7355 62.5%,   /* 土 - 32pxグリッド境界に調整 */
+          #696969 62.5%, #696969 81.25%,   /* 石 - 32pxグリッド境界に調整 */
+          #2F2F2F 81.25%);               /* 深い石 */
         position: relative;
         min-height: 100vh;
       }
@@ -59,6 +59,44 @@
         animation: clouds 30s linear infinite;
       }
       
+      /* 石ブロック専用の固定グリッド */
+      .minecraft-world-stone-grid {
+        content: '';
+        position: fixed;
+        top: 62.5vh; /* 石の領域開始位置 */
+        left: 0;
+        right: 0;
+        height: 18.75vh; /* 石の領域の高さ（62.5%から81.25%まで） */
+        z-index: -1;
+        pointer-events: none;
+        background-image:
+          /* 32pxの完全に固定されたグリッド */
+          repeating-linear-gradient(
+            0deg,
+            rgba(105, 105, 105, 0.6) 0px,
+            rgba(105, 105, 105, 0.6) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(105, 105, 105, 0.6) 0px,
+            rgba(105, 105, 105, 0.6) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          /* 石のテクスチャ */
+          repeating-linear-gradient(
+            45deg,
+            rgba(169, 169, 169, 0.3),
+            rgba(169, 169, 169, 0.3) 1px,
+            transparent 1px,
+            transparent 8px
+          );
+        background-size: 32px 32px, 32px 32px, 16px 16px;
+        /* アニメーションなし - 完全に固定 */
+      }
+      
       .minecraft-world::after {
         content: '';
         position: fixed;
@@ -71,24 +109,46 @@
           /* より目立つ木のテクスチャ */
           radial-gradient(circle at 15% 70%, rgba(139, 69, 19, 0.6) 8px, rgba(139, 69, 19, 0.3) 16px, transparent 24px),
           radial-gradient(circle at 85% 75%, rgba(139, 69, 19, 0.7) 12px, rgba(139, 69, 19, 0.4) 20px, transparent 28px),
-          radial-gradient(circle at 45% 85%, rgba(34, 139, 34, 0.5) 6px, rgba(34, 139, 34, 0.2) 12px, transparent 18px),
-          /* 石のテクスチャ - より鮮明に */
+          radial-gradient(circle at 45% 85%, rgba(34, 139, 34, 0.5) 6px, rgba(34, 139, 34, 0.2) 12px, transparent 18px);
+        background-size: 120px 120px, 180px 180px, 80px 80px;
+        animation: worldShift 40s ease-in-out infinite;
+      }
+      
+      /* 石ブロック専用の固定グリッド */
+      .minecraft-world::before {
+        content: '';
+        position: fixed;
+        top: 65vh; /* 石の領域開始位置 */
+        left: 0;
+        right: 0;
+        height: 20vh; /* 石の領域の高さ（65%から85%まで） */
+        z-index: -1;
+        background-image:
+          /* 32pxの完全に固定されたグリッド */
           repeating-linear-gradient(
-            45deg,
-            rgba(105, 105, 105, 0.3),
-            rgba(105, 105, 105, 0.3) 2px,
+            0deg,
+            rgba(105, 105, 105, 0.6) 0px,
+            rgba(105, 105, 105, 0.6) 2px,
             transparent 2px,
-            transparent 8px
+            transparent 32px
           ),
           repeating-linear-gradient(
-            -45deg,
-            rgba(169, 169, 169, 0.2),
-            rgba(169, 169, 169, 0.2) 1px,
+            90deg,
+            rgba(105, 105, 105, 0.6) 0px,
+            rgba(105, 105, 105, 0.6) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          /* 石のテクスチャ */
+          repeating-linear-gradient(
+            45deg,
+            rgba(169, 169, 169, 0.3),
+            rgba(169, 169, 169, 0.3) 1px,
             transparent 1px,
-            transparent 6px
+            transparent 8px
           );
-        background-size: 120px 120px, 180px 180px, 80px 80px, 16px 16px, 12px 12px;
-        animation: worldShift 40s ease-in-out infinite;
+        background-size: 32px 32px, 32px 32px, 16px 16px;
+        /* アニメーションなし - 完全に固定 */
       }
       
       @keyframes clouds {
@@ -111,20 +171,27 @@
           radial-gradient(circle at 85% 75%, rgba(139, 69, 19, 0.7) 12px, rgba(139, 69, 19, 0.4) 20px, transparent 28px),
           radial-gradient(circle at 45% 85%, rgba(34, 139, 34, 0.5) 6px, rgba(34, 139, 34, 0.2) 12px, transparent 18px),
           repeating-linear-gradient(
-            45deg,
-            rgba(105, 105, 105, 0.3),
-            rgba(105, 105, 105, 0.3) 2px,
+            0deg,
+            rgba(105, 105, 105, 0.4),
+            rgba(105, 105, 105, 0.4) 2px,
             transparent 2px,
-            transparent 8px
+            transparent 32px
           ),
           repeating-linear-gradient(
-            -45deg,
+            90deg,
+            rgba(105, 105, 105, 0.4),
+            rgba(105, 105, 105, 0.4) 2px,
+            transparent 2px,
+            transparent 32px
+          ),
+          repeating-linear-gradient(
+            45deg,
             rgba(169, 169, 169, 0.2),
             rgba(169, 169, 169, 0.2) 1px,
             transparent 1px,
-            transparent 6px
+            transparent 16px
           );
-        background-size: 200px 200px, 120px 120px, 180px 180px, 80px 80px, 16px 16px, 12px 12px;
+        background-size: 200px 200px, 120px 120px, 180px 180px, 80px 80px, 32px 32px, 32px 32px, 32px 32px;
       }
       
       /* マインクラフト風ボタン */
