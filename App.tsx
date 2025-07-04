@@ -3,8 +3,6 @@ import Header from './Header';
 import KeyboardLayout from './KeyboardLayout';
 import { CommandList } from './CommandList';
 import { MINECRAFT_COMMANDS, COMMAND_CATEGORIES } from './constants';
-import BlockDamageSystem from './BlockDamage';
-import CanvasGrid from './CanvasGrid';
 
 export enum Tab {
   Keyboard = 'keyboard',
@@ -19,27 +17,21 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <BlockDamageSystem>
-      {/* 完璧に同期されたCanvasグリッド - 全地形対応 */}
-      <CanvasGrid 
-        blockSize={32}
-      />
-      
-      <div 
-        className="min-h-screen p-4 sm:p-8"
-        style={{
-          background: `
-            linear-gradient(to bottom, 
-              #87CEEB 0%, #87CEEB 25%,
-              #7CB342 25%, #7CB342 45%,
-              #8D6E63 45%, #8D6E63 65%,
-              #616161 65%, #616161 98%,
-              #424242 98%
-            )`,
-          backgroundAttachment: 'fixed',
-          position: 'relative'
-        }}
-      >
+    <div 
+      className="min-h-screen p-4 sm:p-8"
+      style={{
+        background: `
+          linear-gradient(to bottom, 
+            #87CEEB 0%, #87CEEB 25%,
+            #7CB342 25%, #7CB342 45%,
+            #8D6E63 45%, #8D6E63 65%,
+            #616161 65%, #616161 98%,
+            #424242 98%
+          )`,
+        backgroundAttachment: 'fixed',
+        position: 'relative'
+      }}
+    >
       {/* 雲のレイヤー - 背景の青い部分のみ、パネルの後ろ */}
       <div 
         style={{
@@ -624,98 +616,7 @@ const App: React.FC = () => {
         </div>
       </div>
       
-      {/* 本格的なMinecraft風草ブロック格子模様 */}
-      <div 
-        style={{
-          position: 'fixed',
-          top: '25%', // 青い空の部分（上部25%）を除外
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 1,
-          background: `
-            /* Minecraftスタイルの立体的なブロック境界線 */
-            repeating-linear-gradient(
-              to right,
-              transparent 0px,
-              transparent 15px,
-              rgba(255, 255, 255, 0.3) 15px, /* 上部ハイライト */
-              rgba(255, 255, 255, 0.3) 16px,
-              rgba(76, 114, 79, 0.6) 16px, /* より落ち着いたメインの境界線 */
-              rgba(76, 114, 79, 0.6) 17px,
-              rgba(0, 0, 0, 0.25) 17px, /* 下部シャドウ */
-              rgba(0, 0, 0, 0.25) 18px,
-              transparent 18px,
-              transparent 32px
-            ),
-            repeating-linear-gradient(
-              to bottom,
-              transparent 0px,
-              transparent 15px,
-              rgba(255, 255, 255, 0.3) 15px, /* 左部ハイライト */
-              rgba(255, 255, 255, 0.3) 16px,
-              rgba(76, 114, 79, 0.6) 16px, /* より落ち着いたメインの境界線 */
-              rgba(76, 114, 79, 0.6) 17px,
-              rgba(0, 0, 0, 0.25) 17px, /* 右部シャドウ */
-              rgba(0, 0, 0, 0.25) 18px,
-              transparent 18px,
-              transparent 32px
-            ),
-            /* 各ブロック内の草テクスチャパターン */
-            repeating-linear-gradient(
-              45deg,
-              transparent 0px,
-              transparent 2px,
-              rgba(88, 129, 87, 0.2) 2px,
-              rgba(88, 129, 87, 0.2) 3px,
-              transparent 3px,
-              transparent 6px,
-              rgba(102, 141, 96, 0.18) 6px,
-              rgba(102, 141, 96, 0.18) 7px,
-              transparent 7px,
-              transparent 10px
-            ),
-            repeating-linear-gradient(
-              -45deg,
-              transparent 0px,
-              transparent 3px,
-              rgba(118, 155, 108, 0.15) 3px,
-              rgba(118, 155, 108, 0.15) 4px,
-              transparent 4px,
-              transparent 8px,
-              rgba(104, 145, 100, 0.12) 8px,
-              rgba(104, 145, 100, 0.12) 9px,
-              transparent 9px,
-              transparent 12px
-            ),
-            /* Minecraft風のピクセル状草ドット（より自然な色） */
-            radial-gradient(circle at 4px 4px, rgba(94, 135, 89, 0.8) 1px, transparent 1px),
-            radial-gradient(circle at 12px 8px, rgba(108, 147, 101, 0.7) 0.8px, transparent 0.8px),
-            radial-gradient(circle at 20px 12px, rgba(122, 159, 116, 0.8) 1px, transparent 1px),
-            radial-gradient(circle at 8px 16px, rgba(86, 131, 85, 0.7) 0.8px, transparent 0.8px),
-            radial-gradient(circle at 24px 20px, rgba(100, 143, 97, 0.8) 1px, transparent 1px),
-            radial-gradient(circle at 16px 24px, rgba(114, 151, 109, 0.7) 0.8px, transparent 0.8px),
-            radial-gradient(circle at 28px 28px, rgba(92, 137, 91, 0.8) 1px, transparent 1px),
-            /* ブロック内の細かいノイズテクスチャ */
-            repeating-linear-gradient(
-              0deg,
-              rgba(70, 108, 74, 0.08) 0px,
-              rgba(70, 108, 74, 0.08) 1px,
-              transparent 1px,
-              transparent 4px
-            ),
-            repeating-linear-gradient(
-              90deg,
-              rgba(82, 120, 86, 0.06) 0px,
-              rgba(82, 120, 86, 0.06) 1px,
-              transparent 1px,
-              transparent 3px
-            )
-          `,
-          backgroundSize: '32px 32px, 32px 32px, 10px 10px, 12px 12px, 32px 32px, 32px 32px, 32px 32px, 32px 32px, 32px 32px, 32px 32px, 32px 32px, 4px 4px, 3px 3px',
-          pointerEvents: 'none'
-        }}
-      />
+
       
       {/* 土・石ブロックテクスチャのレイヤー（青い空の部分を除く） */}
       <div 
@@ -741,86 +642,13 @@ const App: React.FC = () => {
             radial-gradient(circle at 50% 10%, rgba(128, 128, 128, 0.4) 1px, transparent 1px),
             radial-gradient(circle at 15% 60%, rgba(105, 105, 105, 0.3) 0.8px, transparent 0.8px),
             radial-gradient(circle at 85% 40%, rgba(169, 169, 169, 0.35) 1.5px, transparent 1.5px),
-            radial-gradient(circle at 60% 85%, rgba(128, 128, 128, 0.25) 0.6px, transparent 0.6px),
-            
-            /* Minecraft風のピクセル状境界線 */
-            repeating-linear-gradient(
-              0deg,
-              transparent,
-              transparent 15px,
-              rgba(255, 255, 255, 0.2) 15px, /* ハイライト */
-              rgba(255, 255, 255, 0.2) 16px,
-              rgba(0, 0, 0, 0.4) 16px, /* メイン境界線 */
-              rgba(0, 0, 0, 0.4) 17px,
-              rgba(0, 0, 0, 0.6) 17px, /* シャドウ */
-              rgba(0, 0, 0, 0.6) 18px,
-              transparent 18px,
-              transparent 32px
-            ),
-            repeating-linear-gradient(
-              90deg,
-              transparent,
-              transparent 15px,
-              rgba(255, 255, 255, 0.2) 15px, /* ハイライト */
-              rgba(255, 255, 255, 0.2) 16px,
-              rgba(0, 0, 0, 0.4) 16px, /* メイン境界線 */
-              rgba(0, 0, 0, 0.4) 17px,
-              rgba(0, 0, 0, 0.6) 17px, /* シャドウ */
-              rgba(0, 0, 0, 0.6) 18px,
-              transparent 18px,
-              transparent 32px
-            ),
-            
-            /* ブロック内のMinecraft風ノイズパターン */
-            repeating-linear-gradient(
-              45deg,
-              rgba(0, 0, 0, 0.05) 0px,
-              rgba(0, 0, 0, 0.05) 1px,
-              transparent 1px,
-              transparent 3px
-            ),
-            repeating-linear-gradient(
-              -45deg,
-              rgba(255, 255, 255, 0.03) 0px,
-              rgba(255, 255, 255, 0.03) 1px,
-              transparent 1px,
-              transparent 4px
-            )
+            radial-gradient(circle at 60% 85%, rgba(128, 128, 128, 0.25) 0.6px, transparent 0.6px)
           `,
-          backgroundSize: '64px 64px, 48px 48px, 32px 32px, 56px 56px, 40px 40px, 24px 24px, 72px 72px, 60px 60px, 36px 36px, 44px 44px, 52px 52px, 28px 28px, 32px 32px, 32px 32px, 3px 3px, 4px 4px'
+          backgroundSize: '64px 64px, 48px 48px, 32px 32px, 56px 56px, 40px 40px, 24px 24px, 72px 72px, 60px 60px, 36px 36px, 44px 44px, 52px 52px, 28px 28px'
         }}
       />
       
-      {/* 16x16ピクセルの細かいMinecraft風グリッド */}
-      <div 
-        style={{
-          position: 'fixed',
-          top: '25%',
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 0.5,
-          background: `
-            /* 16x16ピクセルの細かいグリッド（Minecraftのピクセル表現） */
-            repeating-linear-gradient(
-              to right,
-              transparent 0px,
-              transparent 15px,
-              rgba(0, 0, 0, 0.05) 15px,
-              rgba(0, 0, 0, 0.05) 16px
-            ),
-            repeating-linear-gradient(
-              to bottom,
-              transparent 0px,
-              transparent 15px,
-              rgba(0, 0, 0, 0.05) 15px,
-              rgba(0, 0, 0, 0.05) 16px
-            )
-          `,
-          backgroundSize: '16px 16px, 16px 16px',
-          pointerEvents: 'none'
-        }}
-      />
+
       
       <div className="max-w-7xl mx-auto" style={{ position: 'relative', zIndex: 10 }}>
         <Header activeTab={activeTab} onTabChange={handleTabChange} />
@@ -887,8 +715,7 @@ const App: React.FC = () => {
           100% { transform: translateX(calc(100vw + 25px)) translateY(0px); }
         }
       `}</style>
-      </div>
-    </BlockDamageSystem>
+    </div>
   );
 };
 

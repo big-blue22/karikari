@@ -33,7 +33,7 @@ const BlockDamageSystem: React.FC<BlockDamageSystemProps> = ({ children }) => {
 
   // 座標をブロックグリッドに変換（ピクセル完璧同期）
   const getBlockCoords = (x: number, y: number) => {
-    // CanvasGridと同じピクセル完璧オフセット計算
+    // ピクセル完璧オフセット計算
     const pixelPerfectOffsetX = (windowSize.width % BLOCK_SIZE) / 2;
     
     // X軸オフセット調整

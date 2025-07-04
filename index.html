@@ -39,62 +39,9 @@
           radial-gradient(ellipse at 20% 15%, rgba(255,255,255,0.9) 30px, rgba(255,255,255,0.5) 50px, transparent 70px),
           radial-gradient(ellipse at 80% 10%, rgba(255,255,255,0.8) 40px, rgba(255,255,255,0.4) 60px, transparent 80px),
           radial-gradient(ellipse at 40% 20%, rgba(255,255,255,0.7) 25px, rgba(255,255,255,0.3) 45px, transparent 65px),
-          radial-gradient(ellipse at 60% 8%, rgba(255,255,255,0.6) 35px, rgba(255,255,255,0.2) 55px, transparent 75px),
-          /* 草ブロックパターン - より濃く */
-          repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 16px,
-            rgba(34, 139, 34, 0.3) 16px,
-            rgba(34, 139, 34, 0.3) 32px
-          ),
-          repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 16px,
-            rgba(34, 139, 34, 0.3) 16px,
-            rgba(34, 139, 34, 0.3) 32px
-          );
-        background-size: 500px 300px, 400px 250px, 300px 200px, 350px 220px, 32px 32px, 32px 32px;
+          radial-gradient(ellipse at 60% 8%, rgba(255,255,255,0.6) 35px, rgba(255,255,255,0.2) 55px, transparent 75px);
+        background-size: 500px 300px, 400px 250px, 300px 200px, 350px 220px;
         animation: clouds 30s linear infinite;
-      }
-      
-      /* 石ブロック専用の固定グリッド */
-      .minecraft-world-stone-grid {
-        content: '';
-        position: fixed;
-        top: 62.5vh; /* 石の領域開始位置 */
-        left: 0;
-        right: 0;
-        height: 18.75vh; /* 石の領域の高さ（62.5%から81.25%まで） */
-        z-index: -1;
-        pointer-events: none;
-        background-image:
-          /* 32pxの完全に固定されたグリッド */
-          repeating-linear-gradient(
-            0deg,
-            rgba(105, 105, 105, 0.6) 0px,
-            rgba(105, 105, 105, 0.6) 2px,
-            transparent 2px,
-            transparent 32px
-          ),
-          repeating-linear-gradient(
-            90deg,
-            rgba(105, 105, 105, 0.6) 0px,
-            rgba(105, 105, 105, 0.6) 2px,
-            transparent 2px,
-            transparent 32px
-          ),
-          /* 石のテクスチャ */
-          repeating-linear-gradient(
-            45deg,
-            rgba(169, 169, 169, 0.3),
-            rgba(169, 169, 169, 0.3) 1px,
-            transparent 1px,
-            transparent 8px
-          );
-        background-size: 32px 32px, 32px 32px, 16px 16px;
-        /* アニメーションなし - 完全に固定 */
       }
       
       .minecraft-world::after {
@@ -169,29 +116,8 @@
           /* 既存の背景 */
           radial-gradient(circle at 15% 70%, rgba(139, 69, 19, 0.6) 8px, rgba(139, 69, 19, 0.3) 16px, transparent 24px),
           radial-gradient(circle at 85% 75%, rgba(139, 69, 19, 0.7) 12px, rgba(139, 69, 19, 0.4) 20px, transparent 28px),
-          radial-gradient(circle at 45% 85%, rgba(34, 139, 34, 0.5) 6px, rgba(34, 139, 34, 0.2) 12px, transparent 18px),
-          repeating-linear-gradient(
-            0deg,
-            rgba(105, 105, 105, 0.4),
-            rgba(105, 105, 105, 0.4) 2px,
-            transparent 2px,
-            transparent 32px
-          ),
-          repeating-linear-gradient(
-            90deg,
-            rgba(105, 105, 105, 0.4),
-            rgba(105, 105, 105, 0.4) 2px,
-            transparent 2px,
-            transparent 32px
-          ),
-          repeating-linear-gradient(
-            45deg,
-            rgba(169, 169, 169, 0.2),
-            rgba(169, 169, 169, 0.2) 1px,
-            transparent 1px,
-            transparent 16px
-          );
-        background-size: 200px 200px, 120px 120px, 180px 180px, 80px 80px, 32px 32px, 32px 32px, 32px 32px;
+          radial-gradient(circle at 45% 85%, rgba(34, 139, 34, 0.5) 6px, rgba(34, 139, 34, 0.2) 12px, transparent 18px);
+        background-size: 200px 200px, 120px 120px, 180px 180px, 80px 80px;
       }
       
       /* マインクラフト風ボタン */
@@ -243,21 +169,6 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: 
-          repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 3px,
-            rgba(255,255,255,0.1) 3px,
-            rgba(255,255,255,0.1) 6px
-          ),
-          repeating-linear-gradient(
-            -45deg,
-            transparent,
-            transparent 2px,
-            rgba(0,0,0,0.1) 2px,
-            rgba(0,0,0,0.1) 4px
-          );
         pointer-events: none;
         border-radius: inherit;
       }
