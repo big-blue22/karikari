@@ -12,14 +12,14 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
     <header 
       className="text-white p-4 rounded-lg"
       style={{
-        background: 'linear-gradient(135deg, rgba(47, 79, 79, 0.2) 0%, rgba(72, 61, 139, 0.15) 50%, rgba(47, 79, 79, 0.2) 100%)',
-        border: '6px solid rgba(47, 79, 79, 0.3)',
+        background: 'linear-gradient(135deg, rgba(47, 79, 79, 0.1) 0%, rgba(72, 61, 139, 0.08) 50%, rgba(47, 79, 79, 0.1) 100%)',
+        border: '6px solid rgba(47, 79, 79, 0.15)',
         boxShadow: `
-          inset 4px 4px 0 rgba(255,255,255,0.1),
-          inset -4px -4px 0 rgba(0,0,0,0.2),
-          0 12px 32px rgba(0,0,0,0.2)
+          inset 4px 4px 0 rgba(255,255,255,0.05),
+          inset -4px -4px 0 rgba(0,0,0,0.1),
+          0 8px 20px rgba(0,0,0,0.1)
         `,
-        backdropFilter: 'blur(6px)'
+        backdropFilter: 'blur(4px)'
       }}
     >
       <div className="relative">

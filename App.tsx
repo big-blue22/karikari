@@ -818,7 +818,7 @@ const App: React.FC = () => {
         <Header activeTab={activeTab} onTabChange={handleTabChange} />
         
         <main 
-          className="mt-6 p-4 sm:p-6 md:p-8 rounded-lg"
+          className="mt-12 p-4 sm:p-6 md:p-8 rounded-lg"
           style={{
             background: 'linear-gradient(135deg, rgba(47, 79, 79, 0.3) 0%, rgba(72, 61, 139, 0.25) 50%, rgba(47, 79, 79, 0.3) 100%)',
             border: '6px solid rgba(47, 79, 79, 0.4)',

@@ -24,13 +24,13 @@ const TabButton: React.FC<TabButtonProps> = ({ onClick, isActive, children }) =>
   };
   
   const inactiveStyle = {
-    background: 'linear-gradient(135deg, rgba(96, 125, 139, 0.4) 0%, rgba(84, 110, 122, 0.4) 50%, rgba(69, 90, 100, 0.4) 100%)',
-    border: '4px solid rgba(55, 71, 79, 0.6)',
+    background: 'linear-gradient(135deg, rgba(96, 125, 139, 0.25) 0%, rgba(84, 110, 122, 0.25) 50%, rgba(69, 90, 100, 0.25) 100%)',
+    border: '4px solid rgba(55, 71, 79, 0.4)',
     color: '#FFF59D',
     boxShadow: `
-      inset 2px 2px 0 rgba(255,255,255,0.15),
-      inset -2px -2px 0 rgba(0,0,0,0.3),
-      0 4px 8px rgba(0,0,0,0.2)
+      inset 2px 2px 0 rgba(255,255,255,0.1),
+      inset -2px -2px 0 rgba(0,0,0,0.2),
+      0 4px 8px rgba(0,0,0,0.15)
     `,
     textShadow: '1px 1px 0 #000'
   };
@@ -42,17 +42,17 @@ const TabButton: React.FC<TabButtonProps> = ({ onClick, isActive, children }) =>
       style={isActive ? activeStyle : inactiveStyle}
       onMouseEnter={(e) => {
         if (!isActive) {
-          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(120, 144, 156, 0.6) 0%, rgba(96, 125, 139, 0.6) 50%, rgba(84, 110, 122, 0.6) 100%)';
+          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(120, 144, 156, 0.4) 0%, rgba(96, 125, 139, 0.4) 50%, rgba(84, 110, 122, 0.4) 100%)';
           e.currentTarget.style.color = '#FFFFFF';
-          e.currentTarget.style.borderColor = 'rgba(255, 213, 79, 0.8)';
+          e.currentTarget.style.borderColor = 'rgba(255, 213, 79, 0.6)';
           e.currentTarget.style.transform = 'scale(1.02) translateY(-1px)';
         }
       }}
       onMouseLeave={(e) => {
         if (!isActive) {
-          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(96, 125, 139, 0.4) 0%, rgba(84, 110, 122, 0.4) 50%, rgba(69, 90, 100, 0.4) 100%)';
+          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(96, 125, 139, 0.25) 0%, rgba(84, 110, 122, 0.25) 50%, rgba(69, 90, 100, 0.25) 100%)';
           e.currentTarget.style.color = '#FFF59D';
-          e.currentTarget.style.borderColor = 'rgba(55, 71, 79, 0.6)';
+          e.currentTarget.style.borderColor = 'rgba(55, 71, 79, 0.4)';
           e.currentTarget.style.transform = 'scale(1.0) translateY(0px)';
         }
       }}
