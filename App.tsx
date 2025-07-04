@@ -25,8 +25,8 @@ const App: React.FC = () => {
             #87CEEB 0%, #87CEEB 25%,
             #7CB342 25%, #7CB342 45%,
             #8D6E63 45%, #8D6E63 65%,
-            #616161 65%, #616161 95%,
-            #424242 95%
+            #616161 65%, #616161 98%,
+            #424242 98%
           )`,
         backgroundAttachment: 'fixed',
         position: 'relative'
