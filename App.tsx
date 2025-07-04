@@ -820,14 +820,14 @@ const App: React.FC = () => {
         <main 
           className="mt-6 p-4 sm:p-6 md:p-8 rounded-lg"
           style={{
-            background: 'linear-gradient(135deg, rgba(47, 79, 79, 0.95) 0%, rgba(72, 61, 139, 0.9) 50%, rgba(47, 79, 79, 0.95) 100%)',
-            border: '6px solid #2F4F4F',
+            background: 'linear-gradient(135deg, rgba(47, 79, 79, 0.3) 0%, rgba(72, 61, 139, 0.25) 50%, rgba(47, 79, 79, 0.3) 100%)',
+            border: '6px solid rgba(47, 79, 79, 0.4)',
             boxShadow: `
-              inset 4px 4px 0 rgba(255,255,255,0.3),
-              inset -4px -4px 0 rgba(0,0,0,0.5),
-              0 12px 32px rgba(0,0,0,0.7)
+              inset 4px 4px 0 rgba(255,255,255,0.15),
+              inset -4px -4px 0 rgba(0,0,0,0.25),
+              0 12px 32px rgba(0,0,0,0.3)
             `,
-            backdropFilter: 'blur(10px)'
+            backdropFilter: 'blur(8px)'
           }}
         >
           {activeTab === Tab.Keyboard && <KeyboardLayout />}
