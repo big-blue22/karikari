@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import Header from './components/Header';
-import KeyboardLayout from './components/KeyboardLayout';
-import { CommandList } from './components/CommandList';
+import Header from './Header';
+import KeyboardLayout from './KeyboardLayout';
+import { CommandList } from './CommandList';
 import { MINECRAFT_COMMANDS, COMMAND_CATEGORIES } from './constants';
 
 export enum Tab {

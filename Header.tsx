@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab } from '../App';
+import { Tab } from './App';
 import TabButton from './TabButton';
 
 interface HeaderProps {
