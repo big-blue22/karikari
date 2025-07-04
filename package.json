@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist",
+    "pages:setup": "echo 'Please follow the instructions in setup-pages.md to configure GitHub Pages'"
   },
   "dependencies": {
     "react-dom": "^19.1.0",
