@@ -23,10 +23,10 @@ const App: React.FC = () => {
         background: `
           linear-gradient(to bottom, 
             #87CEEB 0%, #87CEEB 25%,
-            #90EE90 25%, #90EE90 45%,
-            #8B7355 45%, #8B7355 65%,
-            #696969 65%, #696969 85%,
-            #2F2F2F 85%
+            #7CB342 25%, #7CB342 45%,
+            #8D6E63 45%, #8D6E63 65%,
+            #616161 65%, #616161 85%,
+            #424242 85%
           )`,
         backgroundAttachment: 'fixed',
         position: 'relative'
@@ -40,7 +40,7 @@ const App: React.FC = () => {
           left: 0,
           right: 0,
           height: '25%', // 青い空の部分に合わせて調整
-          zIndex: 0, // パネルより前に表示してテスト
+          zIndex: 2, // パネルより前に表示してテスト
           pointerEvents: 'none',
           overflow: 'hidden'
         }}
@@ -163,51 +163,105 @@ const App: React.FC = () => {
         </div>
       </div>
       
-      {/* 草ブロックパターンのレイヤー */}
+      {/* より本格的な草ブロック格子模様 - マインクラフト風（青い空の部分を除く） */}
       <div 
         style={{
           position: 'fixed',
-          top: 0,
+          top: '25%', // 青い空の部分（上部25%）を除外
           left: 0,
           right: 0,
           bottom: 0,
-          zIndex: -3,
+          zIndex: 1,
           background: `
+            /* 32x32ピクセルの明確な草ブロック境界線 */
+            repeating-linear-gradient(
+              to right,
+              transparent 0px,
+              transparent 31px,
+              #1B5E20 31px,
+              #1B5E20 33px
+            ),
+            repeating-linear-gradient(
+              to bottom,
+              transparent 0px,
+              transparent 31px,
+              #1B5E20 31px,
+              #1B5E20 33px
+            ),
+            /* 各ブロック内の立体的な影 */
+            repeating-linear-gradient(
+              to right,
+              rgba(0, 0, 0, 0.1) 0px,
+              rgba(0, 0, 0, 0.1) 2px,
+              transparent 2px,
+              transparent 30px,
+              rgba(0, 0, 0, 0.1) 30px,
+              rgba(0, 0, 0, 0.1) 32px
+            ),
+            repeating-linear-gradient(
+              to bottom,
+              rgba(0, 0, 0, 0.1) 0px,
+              rgba(0, 0, 0, 0.1) 2px,
+              transparent 2px,
+              transparent 30px,
+              rgba(0, 0, 0, 0.1) 30px,
+              rgba(0, 0, 0, 0.1) 32px
+            ),
+            /* 草のドット模様 */
+            radial-gradient(circle at 8px 8px, #2E7D32 1px, transparent 1px),
+            radial-gradient(circle at 24px 16px, #388E3C 1px, transparent 1px),
+            radial-gradient(circle at 16px 24px, #43A047 1px, transparent 1px),
+            radial-gradient(circle at 4px 20px, #4CAF50 1px, transparent 1px),
+            radial-gradient(circle at 28px 4px, #66BB6A 1px, transparent 1px)
+          `,
+          backgroundSize: '32px 32px, 32px 32px, 32px 32px, 32px 32px, 32px 32px, 32px 32px, 32px 32px, 32px 32px, 32px 32px',
+          pointerEvents: 'none'
+        }}
+      />
+      
+      {/* 土・石ブロックテクスチャのレイヤー（青い空の部分を除く） */}
+      <div 
+        style={{
+          position: 'fixed',
+          top: '25%', // 青い空の部分（上部25%）を除外
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 0,
+          background: `
+            /* 土ブロックのテクスチャ */
+            radial-gradient(circle at 25% 60%, rgba(139, 69, 19, 0.3) 3px, transparent 3px),
+            radial-gradient(circle at 75% 40%, rgba(160, 82, 45, 0.25) 4px, transparent 4px),
+            radial-gradient(circle at 50% 80%, rgba(101, 67, 33, 0.2) 2px, transparent 2px),
+            /* 石ブロックのテクスチャ */
+            radial-gradient(circle at 30% 30%, rgba(105, 105, 105, 0.4) 2px, transparent 2px),
+            radial-gradient(circle at 70% 70%, rgba(169, 169, 169, 0.3) 3px, transparent 3px),
+            radial-gradient(circle at 15% 85%, rgba(128, 128, 128, 0.25) 1px, transparent 1px),
+            /* ブロック境界の影 */
             repeating-linear-gradient(
               0deg,
               transparent,
-              transparent 16px,
-              rgba(34, 139, 34, 0.3) 16px,
-              rgba(34, 139, 34, 0.3) 32px
+              transparent 30px,
+              rgba(0, 0, 0, 0.1) 30px,
+              rgba(0, 0, 0, 0.1) 32px,
+              transparent 32px,
+              transparent 34px
             ),
             repeating-linear-gradient(
               90deg,
               transparent,
-              transparent 16px,
-              rgba(34, 139, 34, 0.3) 16px,
-              rgba(34, 139, 34, 0.3) 32px
+              transparent 30px,
+              rgba(0, 0, 0, 0.1) 30px,
+              rgba(0, 0, 0, 0.1) 32px,
+              transparent 32px,
+              transparent 34px
             )
           `,
-          backgroundSize: '32px 32px, 32px 32px'
+          backgroundSize: '80px 80px, 120px 120px, 60px 60px, 40px 40px, 70px 70px, 30px 30px, 32px 32px, 32px 32px'
         }}
       />
       
-      {/* 太陽のレイヤー */}
-      <div 
-        style={{
-          position: 'fixed',
-          top: '10%',
-          right: '15%',
-          width: '80px',
-          height: '80px',
-          background: 'radial-gradient(circle, #FFD700 0%, #FFA500 50%, transparent 70%)',
-          borderRadius: '50%',
-          zIndex: -1,
-          boxShadow: '0 0 50px rgba(255, 215, 0, 0.5)'
-        }}
-      />
-      
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto" style={{ position: 'relative', zIndex: 10 }}>
         <Header activeTab={activeTab} onTabChange={handleTabChange} />
         
         <main 
