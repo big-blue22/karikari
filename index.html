@@ -15,8 +15,14 @@
       
       /* マインクラフト風ブロックパターン */
       .minecraft-world {
-        background: linear-gradient(to bottom, #87CEEB 0%, #87CEEB 30%, #90EE90 30%, #90EE90 60%, #8B7355 60%, #8B7355 80%, #696969 80%);
+        background: linear-gradient(to bottom, 
+          #87CEEB 0%, #87CEEB 25%,    /* 空 */
+          #90EE90 25%, #90EE90 45%,   /* 草地 */
+          #8B7355 45%, #8B7355 65%,   /* 土 */
+          #696969 65%, #696969 85%,   /* 石 */
+          #2F2F2F 85%);               /* 深い石 */
         position: relative;
+        min-height: 100vh;
       }
       
       .minecraft-world::before {
@@ -26,29 +32,30 @@
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: -1;
+        z-index: -2;
         background-image: 
-          /* 雲 */
-          radial-gradient(circle at 20% 20%, rgba(255,255,255,0.8) 8px, transparent 8px),
-          radial-gradient(circle at 80% 10%, rgba(255,255,255,0.7) 12px, transparent 12px),
-          radial-gradient(circle at 40% 15%, rgba(255,255,255,0.6) 6px, transparent 6px),
-          /* 草ブロックパターン */
+          /* より大きく目立つ雲 */
+          radial-gradient(ellipse at 20% 15%, rgba(255,255,255,0.9) 30px, rgba(255,255,255,0.5) 50px, transparent 70px),
+          radial-gradient(ellipse at 80% 10%, rgba(255,255,255,0.8) 40px, rgba(255,255,255,0.4) 60px, transparent 80px),
+          radial-gradient(ellipse at 40% 20%, rgba(255,255,255,0.7) 25px, rgba(255,255,255,0.3) 45px, transparent 65px),
+          radial-gradient(ellipse at 60% 8%, rgba(255,255,255,0.6) 35px, rgba(255,255,255,0.2) 55px, transparent 75px),
+          /* 草ブロックパターン - より濃く */
           repeating-linear-gradient(
             0deg,
             transparent,
             transparent 16px,
-            rgba(34, 139, 34, 0.1) 16px,
-            rgba(34, 139, 34, 0.1) 32px
+            rgba(34, 139, 34, 0.3) 16px,
+            rgba(34, 139, 34, 0.3) 32px
           ),
           repeating-linear-gradient(
             90deg,
             transparent,
             transparent 16px,
-            rgba(34, 139, 34, 0.1) 16px,
-            rgba(34, 139, 34, 0.1) 32px
+            rgba(34, 139, 34, 0.3) 16px,
+            rgba(34, 139, 34, 0.3) 32px
           );
-        background-size: 400px 400px, 300px 300px, 200px 200px, 32px 32px, 32px 32px;
-        animation: clouds 20s linear infinite;
+        background-size: 500px 300px, 400px 250px, 300px 200px, 350px 220px, 32px 32px, 32px 32px;
+        animation: clouds 30s linear infinite;
       }
       
       .minecraft-world::after {
@@ -60,19 +67,27 @@
         bottom: 0;
         z-index: -1;
         background-image:
-          /* 木のテクスチャ */
-          radial-gradient(circle at 15% 70%, rgba(139, 69, 19, 0.3) 4px, transparent 4px),
-          radial-gradient(circle at 85% 75%, rgba(139, 69, 19, 0.3) 6px, transparent 6px),
-          /* 石のテクスチャ */
+          /* より目立つ木のテクスチャ */
+          radial-gradient(circle at 15% 70%, rgba(139, 69, 19, 0.6) 8px, rgba(139, 69, 19, 0.3) 16px, transparent 24px),
+          radial-gradient(circle at 85% 75%, rgba(139, 69, 19, 0.7) 12px, rgba(139, 69, 19, 0.4) 20px, transparent 28px),
+          radial-gradient(circle at 45% 85%, rgba(34, 139, 34, 0.5) 6px, rgba(34, 139, 34, 0.2) 12px, transparent 18px),
+          /* 石のテクスチャ - より鮮明に */
           repeating-linear-gradient(
             45deg,
-            rgba(105, 105, 105, 0.1),
-            rgba(105, 105, 105, 0.1) 2px,
+            rgba(105, 105, 105, 0.3),
+            rgba(105, 105, 105, 0.3) 2px,
             transparent 2px,
             transparent 8px
+          ),
+          repeating-linear-gradient(
+            -45deg,
+            rgba(169, 169, 169, 0.2),
+            rgba(169, 169, 169, 0.2) 1px,
+            transparent 1px,
+            transparent 6px
           );
-        background-size: 100px 100px, 150px 150px, 16px 16px;
-        animation: worldShift 30s ease-in-out infinite;
+        background-size: 120px 120px, 180px 180px, 80px 80px, 16px 16px, 12px 12px;
+        animation: worldShift 40s ease-in-out infinite;
       }
       
       @keyframes clouds {
@@ -81,8 +96,34 @@
       }
       
       @keyframes worldShift {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-5px); }
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-3px) scale(1.002); }
+      }
+      
+      /* 太陽の効果を追加 */
+      .minecraft-world::after {
+        background-image:
+          /* 太陽 */
+          radial-gradient(circle at 85% 15%, rgba(255, 215, 0, 0.8) 20px, rgba(255, 165, 0, 0.4) 40px, transparent 60px),
+          /* 既存の背景 */
+          radial-gradient(circle at 15% 70%, rgba(139, 69, 19, 0.6) 8px, rgba(139, 69, 19, 0.3) 16px, transparent 24px),
+          radial-gradient(circle at 85% 75%, rgba(139, 69, 19, 0.7) 12px, rgba(139, 69, 19, 0.4) 20px, transparent 28px),
+          radial-gradient(circle at 45% 85%, rgba(34, 139, 34, 0.5) 6px, rgba(34, 139, 34, 0.2) 12px, transparent 18px),
+          repeating-linear-gradient(
+            45deg,
+            rgba(105, 105, 105, 0.3),
+            rgba(105, 105, 105, 0.3) 2px,
+            transparent 2px,
+            transparent 8px
+          ),
+          repeating-linear-gradient(
+            -45deg,
+            rgba(169, 169, 169, 0.2),
+            rgba(169, 169, 169, 0.2) 1px,
+            transparent 1px,
+            transparent 6px
+          );
+        background-size: 200px 200px, 120px 120px, 180px 180px, 80px 80px, 16px 16px, 12px 12px;
       }
       
       /* マインクラフト風ボタン */
@@ -111,13 +152,20 @@
       
       /* メインパネルのマインクラフト風デザイン */
       .minecraft-panel {
-        background: linear-gradient(135deg, rgba(47, 79, 79, 0.9) 0%, rgba(47, 79, 79, 0.95) 100%);
-        border: 4px solid #2F4F4F;
+        background: linear-gradient(135deg, 
+          rgba(47, 79, 79, 0.95) 0%, 
+          rgba(72, 61, 139, 0.9) 25%,
+          rgba(47, 79, 79, 0.95) 50%,
+          rgba(72, 61, 139, 0.9) 75%,
+          rgba(47, 79, 79, 0.95) 100%);
+        border: 6px solid #2F4F4F;
         box-shadow: 
-          inset 3px 3px 0 rgba(255,255,255,0.2),
-          inset -3px -3px 0 rgba(0,0,0,0.4),
-          0 8px 24px rgba(0,0,0,0.5);
+          inset 4px 4px 0 rgba(255,255,255,0.3),
+          inset -4px -4px 0 rgba(0,0,0,0.5),
+          0 12px 32px rgba(0,0,0,0.7),
+          0 0 20px rgba(72, 61, 139, 0.3);
         position: relative;
+        backdrop-filter: blur(10px);
       }
       
       .minecraft-panel::before {
@@ -131,11 +179,19 @@
           repeating-linear-gradient(
             45deg,
             transparent,
+            transparent 3px,
+            rgba(255,255,255,0.1) 3px,
+            rgba(255,255,255,0.1) 6px
+          ),
+          repeating-linear-gradient(
+            -45deg,
+            transparent,
             transparent 2px,
-            rgba(255,255,255,0.05) 2px,
-            rgba(255,255,255,0.05) 4px
+            rgba(0,0,0,0.1) 2px,
+            rgba(0,0,0,0.1) 4px
           );
         pointer-events: none;
+        border-radius: inherit;
       }
     </style>
   <script type="importmap">
@@ -148,7 +204,7 @@
 }
 </script>
 </head>
-  <body class="bg-green-600">
+  <body class="bg-gradient-to-b from-blue-400 via-green-400 to-green-600">
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

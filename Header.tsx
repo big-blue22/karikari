@@ -9,7 +9,19 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
   return (
-    <header className="text-white p-4 rounded-lg minecraft-panel">
+    <header 
+      className="text-white p-4 rounded-lg"
+      style={{
+        background: 'linear-gradient(135deg, rgba(47, 79, 79, 0.95) 0%, rgba(72, 61, 139, 0.9) 50%, rgba(47, 79, 79, 0.95) 100%)',
+        border: '6px solid #2F4F4F',
+        boxShadow: `
+          inset 4px 4px 0 rgba(255,255,255,0.3),
+          inset -4px -4px 0 rgba(0,0,0,0.5),
+          0 12px 32px rgba(0,0,0,0.7)
+        `,
+        backdropFilter: 'blur(10px)'
+      }}
+    >
       <div className="flex items-center gap-2 sm:gap-4">
         {/* ロゴ */}
         <div className="flex-shrink-0">
@@ -17,13 +29,23 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
             <img 
               src="https://picsum.photos/seed/minecraftlogo/120" 
               alt="ロゴプレースホルダー"
-              className="w-16 h-16 sm:w-24 sm:h-24 rounded-lg border-4 border-yellow-500/70 shadow-lg shadow-yellow-500/20 transition-transform duration-200 hover:scale-105"
+              className="w-16 h-16 sm:w-24 sm:h-24 rounded-lg transition-transform duration-200 hover:scale-105"
+              style={{
+                border: '4px solid #FFD700',
+                boxShadow: '0 4px 12px rgba(255, 215, 0, 0.3)'
+              }}
             />
           </a>
         </div>
 
         <div className="text-center flex-grow">
-          <h1 className="text-xl sm:text-4xl md:text-5xl font-bold tracking-wider text-shadow-minecraft">
+          <h1 
+            className="text-xl sm:text-4xl md:text-5xl font-bold tracking-wider"
+            style={{
+              textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0 0 8px #ffff00, 0 0 16px #ffff00',
+              color: '#FFD700'
+            }}
+          >
             マイクラ<br className="sm:hidden" /> コマンドの書
           </h1>
           <p className="mt-2 text-xs sm:text-base text-yellow-400 font-bold">
@@ -46,12 +68,6 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
           コマンド一覧 (Commands)
         </TabButton>
       </nav>
-      <style>{`
-        .text-shadow-minecraft {
-          text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 
-                       0 0 8px #ffff00, 0 0 16px #ffff00, 0 0 24px #ff6600;
-        }
-      `}</style>
     </header>
   );
 };
