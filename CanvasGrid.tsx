@@ -2,11 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 
 interface CanvasGridProps {
   blockSize: number;
-  stoneAreaStart: number; // vh
-  stoneAreaHeight: number; // vh
 }
 
-const CanvasGrid: React.FC<CanvasGridProps> = ({ blockSize, stoneAreaStart, stoneAreaHeight }) => {
+const CanvasGrid: React.FC<CanvasGridProps> = ({ blockSize }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
 
@@ -32,35 +30,51 @@ const CanvasGrid: React.FC<CanvasGridProps> = ({ blockSize, stoneAreaStart, ston
     canvas.width = windowSize.width;
     canvas.height = windowSize.height;
 
-    // 石の領域を計算（64%から84%）
-    const stoneStart = (stoneAreaStart / 100) * windowSize.height;
-    const stoneEnd = stoneStart + (stoneAreaHeight / 100) * windowSize.height;
+    // 各地形領域を計算
+    const grassStart = 0.25 * windowSize.height;  // 25%から草地
+    const soilStart = 0.4375 * windowSize.height; // 43.75%から土
+    const stoneStart = 0.625 * windowSize.height; // 62.5%から石
+    const stoneEnd = 0.8125 * windowSize.height;  // 81.25%まで石
 
     // キャンバスをクリア
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // 背景CSSグリッドとの完全同期のためのオフセット計算
-    // 1vh = windowSize.height / 100
-    // 64vh = stoneStart
-    // グリッドは32pxの境界で開始するように調整
+    // ピクセル完璧なオフセット計算
     const pixelPerfectOffsetX = (windowSize.width % blockSize) / 2;
-    const pixelPerfectOffsetY = stoneStart % blockSize;
+    
+    // 草地の開始位置（25vh）を基準にY軸オフセットを計算
+    const grassStartOffset = grassStart % blockSize;
 
-    // 石の領域のみにグリッドを描画
-    ctx.strokeStyle = 'rgba(105, 105, 105, 0.6)';
-    ctx.lineWidth = 2;
+    // 垂直線を描画（全地形領域に）
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.4)';
+    ctx.lineWidth = 1;
 
-    // 垂直線を描画
     for (let x = pixelPerfectOffsetX; x <= canvas.width; x += blockSize) {
       ctx.beginPath();
-      ctx.moveTo(x, stoneStart);
+      ctx.moveTo(x, grassStart);
       ctx.lineTo(x, stoneEnd);
       ctx.stroke();
     }
 
-    // 水平線を描画（石の領域開始位置から）
-    for (let y = stoneStart - pixelPerfectOffsetY; y <= stoneEnd; y += blockSize) {
-      if (y >= stoneStart) { // 石の領域内のみ
+    // 水平線を描画（草地から石まで、32pxグリッドで）
+    for (let y = grassStart - grassStartOffset; y <= stoneEnd; y += blockSize) {
+      if (y >= grassStart) { // 草地領域開始位置以降のみ
+        // 草地領域
+        if (y >= grassStart && y < soilStart) {
+          ctx.strokeStyle = 'rgba(34, 139, 34, 0.6)'; // 草色
+          ctx.lineWidth = 1;
+        }
+        // 土領域  
+        else if (y >= soilStart && y < stoneStart) {
+          ctx.strokeStyle = 'rgba(139, 115, 85, 0.6)'; // 土色
+          ctx.lineWidth = 1;
+        }
+        // 石領域
+        else if (y >= stoneStart && y <= stoneEnd) {
+          ctx.strokeStyle = 'rgba(105, 105, 105, 0.6)'; // 石色
+          ctx.lineWidth = 2;
+        }
+        
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(canvas.width, y);
@@ -68,12 +82,12 @@ const CanvasGrid: React.FC<CanvasGridProps> = ({ blockSize, stoneAreaStart, ston
       }
     }
 
-    // 石のテクスチャを追加
+    // 石のテクスチャを追加（石領域のみ）
     ctx.strokeStyle = 'rgba(169, 169, 169, 0.3)';
     ctx.lineWidth = 1;
 
     for (let x = pixelPerfectOffsetX; x <= canvas.width; x += blockSize / 2) {
-      for (let y = stoneStart - pixelPerfectOffsetY; y <= stoneEnd; y += blockSize / 2) {
+      for (let y = stoneStart - grassStartOffset; y <= stoneEnd; y += blockSize / 2) {
         if (y >= stoneStart && (x / (blockSize / 2) + y / (blockSize / 2)) % 2 === 0) {
           ctx.beginPath();
           ctx.moveTo(x, y);
@@ -83,7 +97,7 @@ const CanvasGrid: React.FC<CanvasGridProps> = ({ blockSize, stoneAreaStart, ston
       }
     }
 
-  }, [windowSize, blockSize, stoneAreaStart, stoneAreaHeight]);
+  }, [windowSize, blockSize]);
 
   return (
     <canvas

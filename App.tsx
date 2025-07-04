@@ -20,11 +20,9 @@ const App: React.FC = () => {
 
   return (
     <BlockDamageSystem>
-      {/* 完璧に同期されたCanvasグリッド */}
+      {/* 完璧に同期されたCanvasグリッド - 全地形対応 */}
       <CanvasGrid 
         blockSize={32}
-        stoneAreaStart={62.5}
-        stoneAreaHeight={18.75}
       />
       
       <div 

@@ -39,10 +39,10 @@ const BlockDamageSystem: React.FC<BlockDamageSystemProps> = ({ children }) => {
     // X軸オフセット調整
     const adjustedX = x - pixelPerfectOffsetX;
     
-    // Y軸はグラデーション境界（62.5vh）から計算
-    const stoneStart = (62.5 / 100) * windowSize.height;
-    const pixelPerfectOffsetY = stoneStart % BLOCK_SIZE;
-    const adjustedY = y - (stoneStart - pixelPerfectOffsetY);
+    // Y軸は草地開始（25vh）から計算
+    const grassStart = (25 / 100) * windowSize.height;
+    const grassStartOffset = grassStart % BLOCK_SIZE;
+    const adjustedY = y - (grassStart - grassStartOffset);
     
     return {
       blockX: Math.floor(adjustedX / BLOCK_SIZE),
@@ -53,12 +53,12 @@ const BlockDamageSystem: React.FC<BlockDamageSystemProps> = ({ children }) => {
   // ブロック描画位置を計算（ピクセル完璧同期）
   const getBlockPosition = (blockX: number, blockY: number) => {
     const pixelPerfectOffsetX = (windowSize.width % BLOCK_SIZE) / 2;
-    const stoneStart = (62.5 / 100) * windowSize.height;
-    const pixelPerfectOffsetY = stoneStart % BLOCK_SIZE;
+    const grassStart = (25 / 100) * windowSize.height;
+    const grassStartOffset = grassStart % BLOCK_SIZE;
     
     return {
       x: blockX * BLOCK_SIZE + pixelPerfectOffsetX,
-      y: blockY * BLOCK_SIZE + (stoneStart - pixelPerfectOffsetY)
+      y: blockY * BLOCK_SIZE + (grassStart - grassStartOffset)
     };
   };
 
