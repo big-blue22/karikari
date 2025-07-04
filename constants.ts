@@ -1,4 +1,3 @@
-
 import { Command } from './types';
 
 export const COMMAND_CATEGORIES = {
@@ -47,5 +46,52 @@ export const MINECRAFT_COMMANDS: Command[] = [
     category: COMMAND_CATEGORIES.WORLD_EDIT,
     command: '//paste',
     description: 'コピーやカットしたものを貼り付ける（ペースト）コマンド。',
+  },
+];
+
+// 採掘システムの定数
+export const MINING_CONFIG = {
+  MINING_TIME: 2000, // 採掘にかかる時間（ミリ秒）
+  REGENERATION_TIME: 5000, // 石の再生時間（ミリ秒）
+  BLOCK_SIZE: 32, // ブロックのサイズ（ピクセル）
+  STONE_AREA_TOP: 62.5, // 石エリアの開始位置（vh）
+  STONE_AREA_HEIGHT: 18.75, // 石エリアの高さ（vh）
+};
+
+export const ORE_TYPES = [
+  {
+    name: '石炭',
+    rarity: 0.15,
+    color: '#2C2C2C',
+    effect: '💎',
+    value: 1,
+  },
+  {
+    name: '鉄鉱石',
+    rarity: 0.08,
+    color: '#D2B48C',
+    effect: '⚒️',
+    value: 3,
+  },
+  {
+    name: '金鉱石',
+    rarity: 0.05,
+    color: '#FFD700',
+    effect: '✨',
+    value: 5,
+  },
+  {
+    name: 'ダイヤモンド',
+    rarity: 0.02,
+    color: '#00BFFF',
+    effect: '💎',
+    value: 10,
+  },
+  {
+    name: 'エメラルド',
+    rarity: 0.01,
+    color: '#50C878',
+    effect: '🟢',
+    value: 15,
   },
 ];
