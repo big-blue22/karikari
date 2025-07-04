@@ -163,6 +163,459 @@ const App: React.FC = () => {
         </div>
       </div>
       
+      {/* 地上の動物たち - 緑の草ブロック部分に配置 */}
+      <div 
+        style={{
+          position: 'fixed',
+          top: '25%',
+          left: 0,
+          right: 0,
+          height: '20%', // 草ブロック部分
+          zIndex: 3,
+          pointerEvents: 'none',
+          overflow: 'hidden'
+        }}
+      >
+        {/* 牛 - 左側 */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '10px',
+            left: '8%',
+            animation: 'animalWalk1 60s linear infinite',
+            filter: 'drop-shadow(3px 3px 6px rgba(0,0,0,0.4))'
+          }}
+        >
+          <div style={{ position: 'relative', width: '48px', height: '32px' }}>
+            {/* 牛の体 */}
+            <div style={{
+              position: 'absolute',
+              left: '8px',
+              bottom: '8px',
+              width: '32px',
+              height: '16px',
+              background: 'linear-gradient(45deg, #FFFFFF 0%, #F5F5F5 50%, #E8E8E8 100%)',
+              border: '2px solid #000000',
+              borderRadius: '2px'
+            }} />
+            {/* 牛の頭 */}
+            <div style={{
+              position: 'absolute',
+              left: '32px',
+              bottom: '12px',
+              width: '16px',
+              height: '16px',
+              background: 'linear-gradient(45deg, #FFFFFF 0%, #F0F0F0 50%, #E0E0E0 100%)',
+              border: '2px solid #000000',
+              borderRadius: '2px'
+            }} />
+            {/* 牛の脚 */}
+            <div style={{
+              position: 'absolute',
+              left: '12px',
+              bottom: '0px',
+              width: '4px',
+              height: '8px',
+              background: '#8B4513',
+              border: '1px solid #000000'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '20px',
+              bottom: '0px',
+              width: '4px',
+              height: '8px',
+              background: '#8B4513',
+              border: '1px solid #000000'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '28px',
+              bottom: '0px',
+              width: '4px',
+              height: '8px',
+              background: '#8B4513',
+              border: '1px solid #000000'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '36px',
+              bottom: '0px',
+              width: '4px',
+              height: '8px',
+              background: '#8B4513',
+              border: '1px solid #000000'
+            }} />
+            {/* 牛の模様 */}
+            <div style={{
+              position: 'absolute',
+              left: '15px',
+              bottom: '15px',
+              width: '8px',
+              height: '6px',
+              background: '#000000',
+              borderRadius: '50%'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '25px',
+              bottom: '18px',
+              width: '6px',
+              height: '4px',
+              background: '#000000',
+              borderRadius: '50%'
+            }} />
+          </div>
+        </div>
+
+        {/* 豚 - 中央左 */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '15px',
+            left: '25%',
+            animation: 'animalWalk2 45s linear infinite',
+            filter: 'drop-shadow(3px 3px 6px rgba(0,0,0,0.4))'
+          }}
+        >
+          <div style={{ position: 'relative', width: '40px', height: '28px' }}>
+            {/* 豚の体 */}
+            <div style={{
+              position: 'absolute',
+              left: '6px',
+              bottom: '8px',
+              width: '28px',
+              height: '14px',
+              background: 'linear-gradient(45deg, #FFB6C1 0%, #FFA0B4 50%, #FF8FA3 100%)',
+              border: '2px solid #000000',
+              borderRadius: '2px'
+            }} />
+            {/* 豚の頭 */}
+            <div style={{
+              position: 'absolute',
+              left: '28px',
+              bottom: '10px',
+              width: '12px',
+              height: '12px',
+              background: 'linear-gradient(45deg, #FFB6C1 0%, #FFA0B4 50%, #FF8FA3 100%)',
+              border: '2px solid #000000',
+              borderRadius: '2px'
+            }} />
+            {/* 豚の脚 */}
+            <div style={{
+              position: 'absolute',
+              left: '10px',
+              bottom: '0px',
+              width: '4px',
+              height: '8px',
+              background: '#FFB6C1',
+              border: '1px solid #000000'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '18px',
+              bottom: '0px',
+              width: '4px',
+              height: '8px',
+              background: '#FFB6C1',
+              border: '1px solid #000000'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '26px',
+              bottom: '0px',
+              width: '4px',
+              height: '8px',
+              background: '#FFB6C1',
+              border: '1px solid #000000'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '32px',
+              bottom: '0px',
+              width: '4px',
+              height: '8px',
+              background: '#FFB6C1',
+              border: '1px solid #000000'
+            }} />
+            {/* 豚の鼻 */}
+            <div style={{
+              position: 'absolute',
+              left: '36px',
+              bottom: '13px',
+              width: '4px',
+              height: '3px',
+              background: '#8B4513',
+              border: '1px solid #000000'
+            }} />
+          </div>
+        </div>
+
+        {/* 羊 - 中央右 */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '12px',
+            left: '55%',
+            animation: 'animalWalk3 55s linear infinite',
+            filter: 'drop-shadow(3px 3px 6px rgba(0,0,0,0.4))'
+          }}
+        >
+          <div style={{ position: 'relative', width: '44px', height: '30px' }}>
+            {/* 羊の毛（体） */}
+            <div style={{
+              position: 'absolute',
+              left: '8px',
+              bottom: '8px',
+              width: '28px',
+              height: '16px',
+              background: 'linear-gradient(45deg, #FFFAF0 0%, #F8F8FF 50%, #F0F8FF 100%)',
+              border: '2px solid #000000',
+              borderRadius: '4px'
+            }} />
+            {/* 羊の頭 */}
+            <div style={{
+              position: 'absolute',
+              left: '30px',
+              bottom: '12px',
+              width: '14px',
+              height: '14px',
+              background: 'linear-gradient(45deg, #000000 0%, #333333 50%, #1a1a1a 100%)',
+              border: '2px solid #000000',
+              borderRadius: '2px'
+            }} />
+            {/* 羊の脚 */}
+            <div style={{
+              position: 'absolute',
+              left: '12px',
+              bottom: '0px',
+              width: '4px',
+              height: '8px',
+              background: '#000000',
+              border: '1px solid #333333'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '20px',
+              bottom: '0px',
+              width: '4px',
+              height: '8px',
+              background: '#000000',
+              border: '1px solid #333333'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '28px',
+              bottom: '0px',
+              width: '4px',
+              height: '8px',
+              background: '#000000',
+              border: '1px solid #333333'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '36px',
+              bottom: '0px',
+              width: '4px',
+              height: '8px',
+              background: '#000000',
+              border: '1px solid #333333'
+            }} />
+            {/* 羊の毛のテクスチャ */}
+            <div style={{
+              position: 'absolute',
+              left: '12px',
+              bottom: '18px',
+              width: '4px',
+              height: '4px',
+              background: '#E6E6FA',
+              borderRadius: '50%'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '20px',
+              bottom: '20px',
+              width: '4px',
+              height: '4px',
+              background: '#E6E6FA',
+              borderRadius: '50%'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '28px',
+              bottom: '18px',
+              width: '4px',
+              height: '4px',
+              background: '#E6E6FA',
+              borderRadius: '50%'
+            }} />
+          </div>
+        </div>
+
+        {/* 鶏 - 右側 */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '18px',
+            left: '78%',
+            animation: 'animalWalk4 35s linear infinite',
+            filter: 'drop-shadow(3px 3px 6px rgba(0,0,0,0.4))'
+          }}
+        >
+          <div style={{ position: 'relative', width: '24px', height: '28px' }}>
+            {/* 鶏の体 */}
+            <div style={{
+              position: 'absolute',
+              left: '4px',
+              bottom: '8px',
+              width: '16px',
+              height: '12px',
+              background: 'linear-gradient(45deg, #FFFFFF 0%, #F5F5DC 50%, #F0E68C 100%)',
+              border: '2px solid #000000',
+              borderRadius: '2px'
+            }} />
+            {/* 鶏の頭 */}
+            <div style={{
+              position: 'absolute',
+              left: '6px',
+              bottom: '16px',
+              width: '12px',
+              height: '10px',
+              background: 'linear-gradient(45deg, #FFFFFF 0%, #F5F5DC 50%, #F0E68C 100%)',
+              border: '2px solid #000000',
+              borderRadius: '2px'
+            }} />
+            {/* 鶏の脚 */}
+            <div style={{
+              position: 'absolute',
+              left: '8px',
+              bottom: '0px',
+              width: '3px',
+              height: '8px',
+              background: '#FFD700',
+              border: '1px solid #000000'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '13px',
+              bottom: '0px',
+              width: '3px',
+              height: '8px',
+              background: '#FFD700',
+              border: '1px solid #000000'
+            }} />
+            {/* 鶏のくちばし */}
+            <div style={{
+              position: 'absolute',
+              left: '16px',
+              bottom: '19px',
+              width: '4px',
+              height: '2px',
+              background: '#FFA500',
+              border: '1px solid #000000'
+            }} />
+            {/* 鶏のとさか */}
+            <div style={{
+              position: 'absolute',
+              left: '9px',
+              bottom: '24px',
+              width: '6px',
+              height: '4px',
+              background: '#DC143C',
+              border: '1px solid #000000',
+              borderRadius: '2px 2px 0 0'
+            }} />
+            {/* 鶏の翼 */}
+            <div style={{
+              position: 'absolute',
+              left: '2px',
+              bottom: '12px',
+              width: '8px',
+              height: '6px',
+              background: 'linear-gradient(45deg, #F5F5DC 0%, #DDD 100%)',
+              border: '1px solid #000000',
+              borderRadius: '4px 0 0 2px'
+            }} />
+          </div>
+        </div>
+
+        {/* 追加の小さな動物 - うさぎ */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '20px',
+            left: '40%',
+            animation: 'animalHop 25s linear infinite',
+            filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.4))'
+          }}
+        >
+          <div style={{ position: 'relative', width: '20px', height: '24px' }}>
+            {/* うさぎの体 */}
+            <div style={{
+              position: 'absolute',
+              left: '4px',
+              bottom: '6px',
+              width: '12px',
+              height: '8px',
+              background: 'linear-gradient(45deg, #F5DEB3 0%, #DEB887 50%, #D2B48C 100%)',
+              border: '2px solid #000000',
+              borderRadius: '2px'
+            }} />
+            {/* うさぎの頭 */}
+            <div style={{
+              position: 'absolute',
+              left: '6px',
+              bottom: '12px',
+              width: '8px',
+              height: '8px',
+              background: 'linear-gradient(45deg, #F5DEB3 0%, #DEB887 50%, #D2B48C 100%)',
+              border: '2px solid #000000',
+              borderRadius: '2px'
+            }} />
+            {/* うさぎの耳 */}
+            <div style={{
+              position: 'absolute',
+              left: '7px',
+              bottom: '18px',
+              width: '2px',
+              height: '6px',
+              background: '#F5DEB3',
+              border: '1px solid #000000',
+              borderRadius: '1px 1px 0 0'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '11px',
+              bottom: '18px',
+              width: '2px',
+              height: '6px',
+              background: '#F5DEB3',
+              border: '1px solid #000000',
+              borderRadius: '1px 1px 0 0'
+            }} />
+            {/* うさぎの脚 */}
+            <div style={{
+              position: 'absolute',
+              left: '6px',
+              bottom: '0px',
+              width: '3px',
+              height: '6px',
+              background: '#F5DEB3',
+              border: '1px solid #000000'
+            }} />
+            <div style={{
+              position: 'absolute',
+              left: '11px',
+              bottom: '0px',
+              width: '3px',
+              height: '6px',
+              background: '#F5DEB3',
+              border: '1px solid #000000'
+            }} />
+          </div>
+        </div>
+      </div>
+      
       {/* 本格的なMinecraft風草ブロック格子模様 */}
       <div 
         style={{
@@ -400,6 +853,30 @@ const App: React.FC = () => {
         @keyframes cloudMove3 {
           0% { transform: translateX(-100px); }
           100% { transform: translateX(calc(100vw + 100px)); }
+        }
+        
+        @keyframes animalWalk1 {
+          0% { transform: translateX(-60px); }
+          100% { transform: translateX(calc(100vw + 60px)); }
+        }
+        @keyframes animalWalk2 {
+          0% { transform: translateX(-50px); }
+          100% { transform: translateX(calc(100vw + 50px)); }
+        }
+        @keyframes animalWalk3 {
+          0% { transform: translateX(-55px); }
+          100% { transform: translateX(calc(100vw + 55px)); }
+        }
+        @keyframes animalWalk4 {
+          0% { transform: translateX(-30px); }
+          100% { transform: translateX(calc(100vw + 30px)); }
+        }
+        @keyframes animalHop {
+          0% { transform: translateX(-25px) translateY(0px); }
+          25% { transform: translateX(25vw) translateY(-5px); }
+          50% { transform: translateX(50vw) translateY(0px); }
+          75% { transform: translateX(75vw) translateY(-3px); }
+          100% { transform: translateX(calc(100vw + 25px)) translateY(0px); }
         }
       `}</style>
     </div>
