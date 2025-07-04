@@ -7,11 +7,11 @@ interface TabButtonProps {
 }
 
 const TabButton: React.FC<TabButtonProps> = ({ onClick, isActive, children }) => {
-  const baseClasses = "px-3 py-2 sm:px-6 sm:py-3 text-sm sm:text-lg font-bold rounded-md transition-all duration-200 ease-in-out transform focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-opacity-50";
+  const baseClasses = "px-3 py-2 sm:px-6 sm:py-3 text-sm sm:text-lg font-bold rounded-md transition-all duration-200 ease-in-out transform focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-opacity-50";
   
-  const activeClasses = "bg-orange-500 text-black shadow-lg shadow-orange-500/50 scale-105";
+  const activeClasses = "minecraft-button text-white scale-105";
   
-  const inactiveClasses = "bg-black/50 border-2 border-orange-400/30 text-orange-300 hover:bg-orange-500/20 hover:text-white hover:border-orange-400";
+  const inactiveClasses = "bg-gray-700/80 border-4 border-gray-600 text-yellow-300 hover:bg-gray-600/80 hover:text-white hover:border-yellow-400 shadow-lg";
 
   return (
     <button

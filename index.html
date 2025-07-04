@@ -12,6 +12,131 @@
       body {
         font-family: 'DotGothic16', sans-serif;
       }
+      
+      /* マインクラフト風ブロックパターン */
+      .minecraft-world {
+        background: linear-gradient(to bottom, #87CEEB 0%, #87CEEB 30%, #90EE90 30%, #90EE90 60%, #8B7355 60%, #8B7355 80%, #696969 80%);
+        position: relative;
+      }
+      
+      .minecraft-world::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        background-image: 
+          /* 雲 */
+          radial-gradient(circle at 20% 20%, rgba(255,255,255,0.8) 8px, transparent 8px),
+          radial-gradient(circle at 80% 10%, rgba(255,255,255,0.7) 12px, transparent 12px),
+          radial-gradient(circle at 40% 15%, rgba(255,255,255,0.6) 6px, transparent 6px),
+          /* 草ブロックパターン */
+          repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 16px,
+            rgba(34, 139, 34, 0.1) 16px,
+            rgba(34, 139, 34, 0.1) 32px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 16px,
+            rgba(34, 139, 34, 0.1) 16px,
+            rgba(34, 139, 34, 0.1) 32px
+          );
+        background-size: 400px 400px, 300px 300px, 200px 200px, 32px 32px, 32px 32px;
+        animation: clouds 20s linear infinite;
+      }
+      
+      .minecraft-world::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        background-image:
+          /* 木のテクスチャ */
+          radial-gradient(circle at 15% 70%, rgba(139, 69, 19, 0.3) 4px, transparent 4px),
+          radial-gradient(circle at 85% 75%, rgba(139, 69, 19, 0.3) 6px, transparent 6px),
+          /* 石のテクスチャ */
+          repeating-linear-gradient(
+            45deg,
+            rgba(105, 105, 105, 0.1),
+            rgba(105, 105, 105, 0.1) 2px,
+            transparent 2px,
+            transparent 8px
+          );
+        background-size: 100px 100px, 150px 150px, 16px 16px;
+        animation: worldShift 30s ease-in-out infinite;
+      }
+      
+      @keyframes clouds {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(100px); }
+      }
+      
+      @keyframes worldShift {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+      }
+      
+      /* マインクラフト風ボタン */
+      .minecraft-button {
+        background: linear-gradient(135deg, #8B4513 0%, #D2691E  50%, #8B4513 100%);
+        border: 3px solid #654321;
+        box-shadow: 
+          inset 2px 2px 0 rgba(255,255,255,0.3),
+          inset -2px -2px 0 rgba(0,0,0,0.3),
+          0 4px 8px rgba(0,0,0,0.3);
+        transition: all 0.1s ease;
+      }
+      
+      .minecraft-button:hover {
+        background: linear-gradient(135deg, #A0522D 0%, #F4A460 50%, #A0522D 100%);
+        transform: translateY(-1px);
+      }
+      
+      .minecraft-button:active {
+        transform: translateY(1px);
+        box-shadow: 
+          inset 2px 2px 0 rgba(0,0,0,0.3),
+          inset -2px -2px 0 rgba(255,255,255,0.3),
+          0 2px 4px rgba(0,0,0,0.3);
+      }
+      
+      /* メインパネルのマインクラフト風デザイン */
+      .minecraft-panel {
+        background: linear-gradient(135deg, rgba(47, 79, 79, 0.9) 0%, rgba(47, 79, 79, 0.95) 100%);
+        border: 4px solid #2F4F4F;
+        box-shadow: 
+          inset 3px 3px 0 rgba(255,255,255,0.2),
+          inset -3px -3px 0 rgba(0,0,0,0.4),
+          0 8px 24px rgba(0,0,0,0.5);
+        position: relative;
+      }
+      
+      .minecraft-panel::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: 
+          repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 2px,
+            rgba(255,255,255,0.05) 2px,
+            rgba(255,255,255,0.05) 4px
+          );
+        pointer-events: none;
+      }
     </style>
   <script type="importmap">
 {
@@ -23,7 +148,7 @@
 }
 </script>
 </head>
-  <body class="bg-sky-400">
+  <body class="bg-green-600">
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
