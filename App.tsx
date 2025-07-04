@@ -8,6 +8,7 @@ import { MINECRAFT_COMMANDS, COMMAND_CATEGORIES } from './constants';
 export enum Tab {
   Keyboard = 'keyboard',
   Commands = 'commands',
+  Mining = 'mining',
 }
 
 const App: React.FC = () => {
@@ -793,6 +794,45 @@ const App: React.FC = () => {
         >
           {activeTab === Tab.Keyboard && <KeyboardLayout />}
           {activeTab === Tab.Commands && <CommandList commands={MINECRAFT_COMMANDS} categories={COMMAND_CATEGORIES} />}
+          {activeTab === Tab.Mining && (
+            <div className="text-center p-8 text-white">
+              <h2 className="text-3xl font-bold mb-6" style={{ 
+                color: '#FFD700',
+                textShadow: '2px 2px 4px rgba(0,0,0,0.8)'
+              }}>
+                ⛏️ マインクラフト風採掘システム ⛏️
+              </h2>
+              <div className="max-w-2xl mx-auto space-y-4">
+                <div className="bg-black/50 p-4 rounded-lg border-2 border-gray-500">
+                  <h3 className="text-xl font-bold mb-2 text-yellow-300">🎯 遊び方</h3>
+                  <p className="mb-2">ねずみ色の石エリア（画面下部）を<strong className="text-red-300">右クリック長押し</strong>で採掘できます！</p>
+                  <p className="text-sm text-blue-300">右クリックを長押しすると採掘が始まり、掘り終わると石が再生します。</p>
+                </div>
+                
+                <div className="bg-black/50 p-4 rounded-lg border-2 border-gray-500">
+                  <h3 className="text-xl font-bold mb-2 text-yellow-300">💎 鉱石の種類</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
+                    <div>💎 石炭 (15%)</div>
+                    <div>⚒️ 鉄鉱石 (8%)</div>
+                    <div>✨ 金鉱石 (5%)</div>
+                    <div>💎 ダイヤモンド (2%)</div>
+                    <div>🟢 エメラルド (1%)</div>
+                    <div>💨 普通の石 (69%)</div>
+                  </div>
+                </div>
+                
+                <div className="bg-black/50 p-4 rounded-lg border-2 border-gray-500">
+                  <h3 className="text-xl font-bold mb-2 text-yellow-300">✨ 特徴</h3>
+                  <ul className="text-sm space-y-1 text-left">
+                    <li>• 鉱石発見時にエフェクトが表示されます</li>
+                    <li>• 発掘した鉱石は画面右上のインベントリに保存</li>
+                    <li>• 掘った石ブロックは5秒後に自動で再生</li>
+                    <li>• レアな鉱石ほど発見確率が低く価値が高い</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
         </main>
         
         <footer className="text-center mt-8 text-white drop-shadow-lg">
@@ -802,8 +842,8 @@ const App: React.FC = () => {
         </footer>
       </div>
       
-      {/* 採掘システム - キーボードタブで有効 */}
-      {activeTab === Tab.Keyboard && <MiningSystem />}
+      {/* 採掘システム - 採掘タブが選択されたときのみ有効 */}
+      {activeTab === Tab.Mining && <MiningSystem />}
       
       <style>{`
         @keyframes cloudMove1 {

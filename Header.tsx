@@ -68,6 +68,12 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
         >
           コマンド一覧 (Commands)
         </TabButton>
+        <TabButton
+          onClick={() => onTabChange(Tab.Mining)}
+          isActive={activeTab === Tab.Mining}
+        >
+          採掘 (Mining)
+        </TabButton>
       </nav>
     </header>
   );
