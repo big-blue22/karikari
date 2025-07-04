@@ -12,14 +12,14 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
     <header 
       className="text-white p-4 rounded-lg"
       style={{
-        background: 'linear-gradient(135deg, rgba(47, 79, 79, 0.95) 0%, rgba(72, 61, 139, 0.9) 50%, rgba(47, 79, 79, 0.95) 100%)',
-        border: '6px solid #2F4F4F',
+        background: 'linear-gradient(135deg, rgba(47, 79, 79, 0.2) 0%, rgba(72, 61, 139, 0.15) 50%, rgba(47, 79, 79, 0.2) 100%)',
+        border: '6px solid rgba(47, 79, 79, 0.3)',
         boxShadow: `
-          inset 4px 4px 0 rgba(255,255,255,0.3),
-          inset -4px -4px 0 rgba(0,0,0,0.5),
-          0 12px 32px rgba(0,0,0,0.7)
+          inset 4px 4px 0 rgba(255,255,255,0.1),
+          inset -4px -4px 0 rgba(0,0,0,0.2),
+          0 12px 32px rgba(0,0,0,0.2)
         `,
-        backdropFilter: 'blur(10px)'
+        backdropFilter: 'blur(6px)'
       }}
     >
       <div className="relative">
@@ -43,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
           <h1 
             className="text-xl sm:text-4xl md:text-5xl font-bold tracking-wider"
             style={{
-              textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0 0 8px #ffff00, 0 0 16px #ffff00',
+              textShadow: '1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 0 0 6px #ffff00, 0 0 12px #ffff00',
               color: '#FFD700'
             }}
           >
