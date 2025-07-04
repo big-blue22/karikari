@@ -22,9 +22,9 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
         backdropFilter: 'blur(10px)'
       }}
     >
-      <div className="flex items-center gap-2 sm:gap-4 relative">
-        {/* ロゴ - 左側に固定 */}
-        <div className="flex-shrink-0">
+      <div className="relative">
+        {/* ロゴ - 絶対配置で左側に固定 */}
+        <div className="absolute left-0 top-0 flex items-center h-full">
           <a href="https://picsum.photos/seed/minecraftlogo/600" target="_blank" rel="noopener noreferrer" aria-label="ロゴを拡大表示">
             <img 
               src="https://picsum.photos/seed/minecraftlogo/120" 
@@ -38,11 +38,8 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
           </a>
         </div>
 
-        {/* タイトル - 画面の完全な中央に配置 */}
-        <div 
-          className="absolute left-1/2 transform -translate-x-1/2 text-center"
-          style={{ width: 'calc(100% - 8rem)' }} // ロゴ分のスペースを考慮
-        >
+        {/* タイトル - 完全中央配置 */}
+        <div className="text-center py-4">
           <h1 
             className="text-xl sm:text-4xl md:text-5xl font-bold tracking-wider"
             style={{
@@ -56,9 +53,6 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
             キーボードとコマンドをマスターして、キミもマイクラ博士だ！
           </p>
         </div>
-
-        {/* 右側のスペーサー（バランス調整用） */}
-        <div className="flex-shrink-0 w-16 sm:w-24"></div>
       </div>
       
       <nav className="mt-4 sm:mt-6 flex justify-center gap-2 sm:gap-4">
