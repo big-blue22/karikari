@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const KeyboardLayout: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
+
   return (
     <div className="text-white">
       <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-orange-400 drop-shadow-md">キーボード配列（はいれつ）</h2>
@@ -8,13 +13,17 @@ const KeyboardLayout: React.FC = () => {
         マイクラをPCで遊ぶときの基本のキーボード操作だ！まずはこれを覚えよう！
       </p>
       <div className="bg-black/30 border-2 border-orange-400/40 rounded-lg p-4 sm:p-8 flex flex-col justify-center items-center min-h-[300px] sm:min-h-[400px] text-center shadow-inner shadow-orange-400/10">
-        <a href="https://picsum.photos/seed/keyboard/1200/600" target="_blank" rel="noopener noreferrer" className="block w-full max-w-2xl" aria-label="キーボード配列の画像を拡大表示">
+        <button 
+          onClick={openModal}
+          className="block w-full max-w-2xl cursor-pointer transition-transform duration-200 hover:scale-[1.02]" 
+          aria-label="キーボード配列の画像を拡大表示"
+        >
           <img 
             src="https://picsum.photos/seed/keyboard/800/400" 
             alt="キーボードの画像がここに表示されます" 
-            className="rounded-md shadow-lg border-2 border-orange-400/50 w-full h-auto transition-transform duration-200 hover:scale-[1.02] hover:shadow-orange-400/40"
+            className="rounded-md shadow-lg border-2 border-orange-400/50 w-full h-auto hover:shadow-orange-400/40"
           />
-        </a>
+        </button>
         <p className="mt-2 text-gray-300 text-xs sm:text-sm">
           画像（がぞう）をタップすると拡大（かくだい）できます
         </p>
@@ -25,6 +34,35 @@ const KeyboardLayout: React.FC = () => {
           (先生へ：この画像を実際のキーボード表に差し替えてください)
         </p>
       </div>
+
+      {/* Modal for enlarged image */}
+      {showModal && (
+        <div 
+          className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+          onClick={closeModal}
+        >
+          <div 
+            className="relative max-w-6xl max-h-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={closeModal}
+              className="absolute -top-12 right-0 text-white text-2xl font-bold bg-red-600 hover:bg-red-700 rounded-full w-10 h-10 flex items-center justify-center transition-colors duration-200"
+              aria-label="画像を閉じる"
+            >
+              ×
+            </button>
+            <img 
+              src="https://picsum.photos/seed/keyboard/1200/600" 
+              alt="キーボード配列の拡大画像" 
+              className="rounded-lg shadow-2xl border-4 border-orange-400 max-w-full max-h-[90vh] object-contain"
+            />
+            <p className="text-center text-white mt-4 text-lg">
+              キーボード配列（拡大表示）
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

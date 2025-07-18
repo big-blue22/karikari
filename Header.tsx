@@ -25,17 +25,15 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
       <div className="relative">
         {/* ロゴ - 絶対配置で左側に固定 */}
         <div className="absolute left-0 top-0 flex items-center h-full">
-          <a href="https://picsum.photos/seed/minecraftlogo/600" target="_blank" rel="noopener noreferrer" aria-label="ロゴを拡大表示">
-            <img 
-              src="https://picsum.photos/seed/minecraftlogo/120" 
-              alt="ロゴプレースホルダー"
-              className="w-16 h-16 sm:w-24 sm:h-24 rounded-lg transition-transform duration-200 hover:scale-105"
-              style={{
-                border: '4px solid #FFD700',
-                boxShadow: '0 4px 12px rgba(255, 215, 0, 0.3)'
-              }}
-            />
-          </a>
+          <img 
+            src="https://picsum.photos/seed/minecraftlogo/120" 
+            alt="ロゴプレースホルダー"
+            className="w-16 h-16 sm:w-24 sm:h-24 rounded-lg"
+            style={{
+              border: '4px solid #FFD700',
+              boxShadow: '0 4px 12px rgba(255, 215, 0, 0.3)'
+            }}
+          />
         </div>
 
         {/* タイトル - 完全中央配置 */}
