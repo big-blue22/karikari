@@ -812,12 +812,12 @@ const App: React.FC = () => {
                 <div className="bg-black/50 p-4 rounded-lg border-2 border-gray-500">
                   <h3 className="text-xl font-bold mb-2 text-yellow-300">💎 鉱石の種類</h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
-                    <div>💎 石炭 (15%)</div>
-                    <div>⚒️ 鉄鉱石 (8%)</div>
-                    <div>✨ 金鉱石 (5%)</div>
-                    <div>💎 ダイヤモンド (2%)</div>
-                    <div>🟢 エメラルド (1%)</div>
-                    <div>💨 普通の石 (69%)</div>
+                    <div>💎 石炭 (15%) - 1XP</div>
+                    <div>⚒️ 鉄鉱石 (8%) - 3XP</div>
+                    <div>✨ 金鉱石 (5%) - 5XP</div>
+                    <div>💎 ダイヤモンド (2%) - 10XP</div>
+                    <div>🟢 エメラルド (1%) - 15XP</div>
+                    <div>💨 普通の石 (69%) - 0XP</div>
                   </div>
                 </div>
                 
@@ -826,6 +826,8 @@ const App: React.FC = () => {
                   <ul className="text-sm space-y-1 text-left">
                     <li>• 鉱石発見時にエフェクトが表示されます</li>
                     <li>• 発掘した鉱石は画面右上のインベントリに保存</li>
+                    <li>• <strong className="text-green-300">鉱石を掘ると経験値を獲得できます</strong></li>
+                    <li>• 経験値バーがいっぱいになるとレベルアップ！</li>
                     <li>• 掘った石ブロックは5秒後に自動で再生</li>
                     <li>• レアな鉱石ほど発見確率が低く価値が高い</li>
                   </ul>

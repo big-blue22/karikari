@@ -38,3 +38,15 @@ export interface MiningState {
   targetArea: MiningArea | null;
   startTime: number | null;
 }
+
+export interface ExperienceState {
+  currentXP: number;
+  level: number;
+  maxXP: number;
+}
+
+export interface LevelUpPopup {
+  isVisible: boolean;
+  newLevel: number;
+  timestamp: number;
+}

@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { MiningArea, MiningState, MiningEffect, OreType } from './types';
-import { MINING_CONFIG, ORE_TYPES } from './constants';
+import { MiningArea, MiningState, MiningEffect, OreType, ExperienceState, LevelUpPopup } from './types';
+import { MINING_CONFIG, ORE_TYPES, EXPERIENCE_CONFIG } from './constants';
+import ExperienceBar from './ExperienceBar';
+import LevelUpPopupComponent from './LevelUpPopup';
 
 interface MiningSystemProps {
   className?: string;
@@ -18,9 +20,65 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
   const [effects, setEffects] = useState<MiningEffect[]>([]);
   const [minedOres, setMinedOres] = useState<(OreType & { id: string })[]>([]);
   
+  // 経験値システムの状態
+  const [experience, setExperience] = useState<ExperienceState>({
+    currentXP: 0,
+    level: 1,
+    maxXP: EXPERIENCE_CONFIG.BASE_XP_PER_LEVEL
+  });
+  const [recentXPGain, setRecentXPGain] = useState<number>(0);
+  const [levelUpPopup, setLevelUpPopup] = useState<LevelUpPopup>({
+    isVisible: false,
+    newLevel: 1,
+    timestamp: 0
+  });
+  
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
   const longPressRef = useRef<NodeJS.Timeout>();
+
+  // レベルに必要なXPを計算
+  const calculateMaxXP = useCallback((level: number): number => {
+    return Math.floor(EXPERIENCE_CONFIG.BASE_XP_PER_LEVEL * Math.pow(EXPERIENCE_CONFIG.XP_GROWTH_RATE, level - 1));
+  }, []);
+
+  // 経験値を追加してレベルアップをチェック
+  const addExperience = useCallback((xpGain: number) => {
+    setExperience(prev => {
+      let newCurrentXP = prev.currentXP + xpGain;
+      let newLevel = prev.level;
+      let newMaxXP = prev.maxXP;
+      
+      // レベルアップチェック
+      while (newCurrentXP >= newMaxXP && newLevel < EXPERIENCE_CONFIG.MAX_LEVEL) {
+        newCurrentXP -= newMaxXP;
+        newLevel += 1;
+        newMaxXP = calculateMaxXP(newLevel);
+        
+        // レベルアップポップアップを表示
+        setLevelUpPopup({
+          isVisible: true,
+          newLevel: newLevel,
+          timestamp: Date.now()
+        });
+      }
+      
+      // 最大レベルの場合、余剰XPは切り捨て
+      if (newLevel >= EXPERIENCE_CONFIG.MAX_LEVEL) {
+        newCurrentXP = Math.min(newCurrentXP, newMaxXP);
+      }
+      
+      return {
+        currentXP: newCurrentXP,
+        level: newLevel,
+        maxXP: newMaxXP
+      };
+    });
+    
+    // XP獲得通知を表示
+    setRecentXPGain(xpGain);
+    setTimeout(() => setRecentXPGain(0), EXPERIENCE_CONFIG.XP_NOTIFICATION_DURATION);
+  }, [calculateMaxXP]);
 
   // 採掘エリアの初期化
   useEffect(() => {
@@ -61,6 +119,19 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
     }
   }, [miningState.isMinning, miningState.startTime]);
 
+  // 鉱石抽選
+  const rollForOre = useCallback((): OreType | null => {
+    const roll = Math.random();
+    
+    for (const ore of ORE_TYPES) {
+      if (roll < ore.rarity) {
+        return ore;
+      }
+    }
+    
+    return null;
+  }, []);
+
   // 採掘完了処理
   const completeMining = useCallback(() => {
     if (!miningState.targetArea) return;
@@ -82,9 +153,13 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
     
     setEffects(prev => [...prev, effect]);
     
-    // 鉱石が見つかった場合はインベントリに追加
+    // 鉱石が見つかった場合の処理
     if (foundOre) {
+      // インベントリに追加
       setMinedOres(prev => [...prev, { ...foundOre, id: Date.now().toString() }]);
+      
+      // 経験値を獲得
+      addExperience(foundOre.value);
     }
     
     // エリアを掘られた状態に
@@ -110,19 +185,22 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
           : a
       ));
     }, MINING_CONFIG.REGENERATION_TIME);
-  }, [miningState.targetArea]);
+  }, [miningState.targetArea, rollForOre, addExperience]);
 
-  // 鉱石抽選
-  const rollForOre = useCallback((): OreType | null => {
-    const roll = Math.random();
-    
-    for (const ore of ORE_TYPES) {
-      if (roll < ore.rarity) {
-        return ore;
-      }
+  // レベルアップポップアップの自動クローズ
+  useEffect(() => {
+    if (levelUpPopup.isVisible) {
+      const timer = setTimeout(() => {
+        setLevelUpPopup(prev => ({ ...prev, isVisible: false }));
+      }, EXPERIENCE_CONFIG.LEVEL_UP_POPUP_DURATION);
+      
+      return () => clearTimeout(timer);
     }
-    
-    return null;
+  }, [levelUpPopup.isVisible]);
+
+  // ポップアップを手動で閉じる
+  const closeLevelUpPopup = useCallback(() => {
+    setLevelUpPopup(prev => ({ ...prev, isVisible: false }));
   }, []);
 
   // 右クリック開始
@@ -345,6 +423,18 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
           </div>
         </div>
       )}
+
+      {/* 経験値バー */}
+      <ExperienceBar 
+        experience={experience}
+        recentXPGain={recentXPGain}
+      />
+
+      {/* レベルアップポップアップ */}
+      <LevelUpPopupComponent 
+        popup={levelUpPopup}
+        onClose={closeLevelUpPopup}
+      />
 
       {/* CSS アニメーション */}
       <style>
