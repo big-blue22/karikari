@@ -50,3 +50,19 @@ export interface LevelUpPopup {
   newLevel: number;
   timestamp: number;
 }
+
+export interface QuizQuestion {
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  command: string;
+}
+
+export interface QuizState {
+  isVisible: boolean;
+  question: QuizQuestion | null;
+  selectedAnswer: number | null;
+  showResult: boolean;
+  isCorrect: boolean;
+  onComplete: (correct: boolean) => void;
+}
