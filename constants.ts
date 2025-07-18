@@ -95,3 +95,12 @@ export const ORE_TYPES = [
     value: 15,
   },
 ];
+
+// 経験値システムの定数
+export const EXPERIENCE_CONFIG = {
+  BASE_XP_PER_LEVEL: 100, // レベル1に必要な基本XP
+  XP_GROWTH_RATE: 1.5, // レベルごとのXP増加率
+  MAX_LEVEL: 50, // 最大レベル
+  XP_NOTIFICATION_DURATION: 2000, // XP獲得通知の表示時間（ミリ秒）
+  LEVEL_UP_POPUP_DURATION: 5000, // レベルアップポップアップの自動閉じ時間（ミリ秒）
+};
