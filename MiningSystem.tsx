@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { MiningArea, MiningState, MiningEffect, OreType, ExperienceState, LevelUpPopup } from './types';
-import { MINING_CONFIG, ORE_TYPES, EXPERIENCE_CONFIG } from './constants';
+import { MiningArea, MiningState, MiningEffect, OreType, ExperienceState, LevelUpPopup, QuizState, QuizQuestion } from './types';
+import { MINING_CONFIG, ORE_TYPES, EXPERIENCE_CONFIG, QUIZ_QUESTIONS } from './constants';
 import ExperienceBar from './ExperienceBar';
 import LevelUpPopupComponent from './LevelUpPopup';
+import QuizPopup from './QuizPopup';
 
 interface MiningSystemProps {
   className?: string;
@@ -31,6 +32,16 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
     isVisible: false,
     newLevel: 1,
     timestamp: 0
+  });
+  
+  // クイズシステムの状態
+  const [quizState, setQuizState] = useState<QuizState>({
+    isVisible: false,
+    question: null,
+    selectedAnswer: null,
+    showResult: false,
+    isCorrect: false,
+    onComplete: () => {}
   });
   
   const containerRef = useRef<HTMLDivElement>(null);
@@ -80,44 +91,24 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
     setTimeout(() => setRecentXPGain(0), EXPERIENCE_CONFIG.XP_NOTIFICATION_DURATION);
   }, [calculateMaxXP]);
 
-  // 採掘エリアの初期化
-  useEffect(() => {
-    const areas: MiningArea[] = [];
-    const cols = Math.floor(window.innerWidth / MINING_CONFIG.BLOCK_SIZE);
-    const rows = 6; // 石エリアの行数
-    
-    for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        areas.push({
-          id: `${row}-${col}`,
-          x: col * MINING_CONFIG.BLOCK_SIZE,
-          y: row * MINING_CONFIG.BLOCK_SIZE,
-          width: MINING_CONFIG.BLOCK_SIZE,
-          height: MINING_CONFIG.BLOCK_SIZE,
-          isRegenerated: true,
-          lastMined: null
-        });
-      }
-    }
-    
-    setMiningAreas(areas);
+  // ランダムなクイズ問題を取得
+  const getRandomQuizQuestion = useCallback((): QuizQuestion => {
+    const randomIndex = Math.floor(Math.random() * QUIZ_QUESTIONS.length);
+    return QUIZ_QUESTIONS[randomIndex];
   }, []);
 
-  // 採掘アニメーション
-  const updateMiningProgress = useCallback(() => {
-    if (!miningState.isMinning || !miningState.startTime) return;
-    
-    const elapsed = Date.now() - miningState.startTime;
-    const progress = Math.min(elapsed / MINING_CONFIG.MINING_TIME, 1);
-    
-    setMiningState(prev => ({ ...prev, progress }));
-    
-    if (progress >= 1) {
-      completeMining();
-    } else {
-      animationRef.current = requestAnimationFrame(updateMiningProgress);
-    }
-  }, [miningState.isMinning, miningState.startTime]);
+  // クイズを開始
+  const startQuiz = useCallback((onComplete: (correct: boolean) => void) => {
+    const question = getRandomQuizQuestion();
+    setQuizState({
+      isVisible: true,
+      question,
+      selectedAnswer: null,
+      showResult: false,
+      isCorrect: false,
+      onComplete
+    });
+  }, [getRandomQuizQuestion]);
 
   // 鉱石抽選
   const rollForOre = useCallback((): OreType | null => {
@@ -158,8 +149,18 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
       // インベントリに追加
       setMinedOres(prev => [...prev, { ...foundOre, id: Date.now().toString() }]);
       
-      // 経験値を獲得
-      addExperience(foundOre.value);
+      // 宝箱の場合はクイズを表示
+      if (foundOre.name === '宝箱') {
+        startQuiz((correct: boolean) => {
+          if (correct) {
+            addExperience(100); // 正解時は100XP
+          }
+          // 不正解時は0XP（何もしない）
+        });
+      } else {
+        // 通常の鉱石の場合は経験値を獲得
+        addExperience(foundOre.value);
+      }
     }
     
     // エリアを掘られた状態に
@@ -185,23 +186,56 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
           : a
       ));
     }, MINING_CONFIG.REGENERATION_TIME);
-  }, [miningState.targetArea, rollForOre, addExperience]);
-
-  // レベルアップポップアップの自動クローズ
-  useEffect(() => {
-    if (levelUpPopup.isVisible) {
-      const timer = setTimeout(() => {
-        setLevelUpPopup(prev => ({ ...prev, isVisible: false }));
-      }, EXPERIENCE_CONFIG.LEVEL_UP_POPUP_DURATION);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [levelUpPopup.isVisible]);
+  }, [miningState.targetArea, rollForOre, addExperience, startQuiz]);
 
   // ポップアップを手動で閉じる
   const closeLevelUpPopup = useCallback(() => {
     setLevelUpPopup(prev => ({ ...prev, isVisible: false }));
   }, []);
+
+  // クイズを閉じる
+  const closeQuiz = useCallback(() => {
+    setQuizState(prev => ({ ...prev, isVisible: false }));
+  }, []);
+
+  // 採掘エリアの初期化
+  useEffect(() => {
+    const areas: MiningArea[] = [];
+    const cols = Math.floor(window.innerWidth / MINING_CONFIG.BLOCK_SIZE);
+    const rows = 6; // 石エリアの行数
+    
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        areas.push({
+          id: `${row}-${col}`,
+          x: col * MINING_CONFIG.BLOCK_SIZE,
+          y: row * MINING_CONFIG.BLOCK_SIZE,
+          width: MINING_CONFIG.BLOCK_SIZE,
+          height: MINING_CONFIG.BLOCK_SIZE,
+          isRegenerated: true,
+          lastMined: null
+        });
+      }
+    }
+    
+    setMiningAreas(areas);
+  }, []);
+
+  // 採掘アニメーション
+  const updateMiningProgress = useCallback(() => {
+    if (!miningState.isMinning || !miningState.startTime) return;
+    
+    const elapsed = Date.now() - miningState.startTime;
+    const progress = Math.min(elapsed / MINING_CONFIG.MINING_TIME, 1);
+    
+    setMiningState(prev => ({ ...prev, progress }));
+    
+    if (progress >= 1) {
+      completeMining();
+    } else {
+      animationRef.current = requestAnimationFrame(updateMiningProgress);
+    }
+  }, [miningState.isMinning, miningState.startTime, completeMining]);
 
   // 右クリック開始
   const handleMouseDown = useCallback((e: React.MouseEvent, area: MiningArea) => {
@@ -238,6 +272,17 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
       });
     }
   }, [miningState.isMinning]);
+
+  // レベルアップポップアップの自動クローズ
+  useEffect(() => {
+    if (levelUpPopup.isVisible) {
+      const timer = setTimeout(() => {
+        setLevelUpPopup(prev => ({ ...prev, isVisible: false }));
+      }, EXPERIENCE_CONFIG.LEVEL_UP_POPUP_DURATION);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [levelUpPopup.isVisible]);
 
   // 採掘アニメーション更新
   useEffect(() => {
@@ -434,6 +479,12 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
       <LevelUpPopupComponent 
         popup={levelUpPopup}
         onClose={closeLevelUpPopup}
+      />
+
+      {/* クイズポップアップ */}
+      <QuizPopup 
+        quizState={quizState}
+        onClose={closeQuiz}
       />
 
       {/* CSS アニメーション */}

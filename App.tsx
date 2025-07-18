@@ -812,12 +812,16 @@ const App: React.FC = () => {
                 <div className="bg-black/50 p-4 rounded-lg border-2 border-gray-500">
                   <h3 className="text-xl font-bold mb-2 text-yellow-300">💎 鉱石の種類</h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
-                    <div>💎 石炭 (15%) - 1XP</div>
-                    <div>⚒️ 鉄鉱石 (8%) - 3XP</div>
-                    <div>✨ 金鉱石 (5%) - 5XP</div>
-                    <div>💎 ダイヤモンド (2%) - 10XP</div>
-                    <div>🟢 エメラルド (1%) - 15XP</div>
-                    <div>💨 普通の石 (69%) - 0XP</div>
+                    <div>🟢 エメラルド (1%) - 100XP</div>
+                    <div>💎 ダイヤモンド (3%) - 50XP</div>
+                    <div>🔷 ラピスラズリ (5%) - 25XP</div>
+                    <div>✨ 金鉱石 (5%) - 20XP</div>
+                    <div>🔴 レッドストーン (8%) - 15XP</div>
+                    <div>⚒️ 鉄鉱石 (12%) - 10XP</div>
+                    <div>⚫ 石炭 (15%) - 8XP</div>
+                    <div>🟤 銅鉱石 (15%) - 5XP</div>
+                    <div>🗿 石 (26%) - 1XP</div>
+                    <div>📦 宝箱 (10%) - クイズ100XP</div>
                   </div>
                 </div>
                 
@@ -830,6 +834,7 @@ const App: React.FC = () => {
                     <li>• 経験値バーがいっぱいになるとレベルアップ！</li>
                     <li>• 掘った石ブロックは5秒後に自動で再生</li>
                     <li>• レアな鉱石ほど発見確率が低く価値が高い</li>
+                    <li>• <strong className="text-yellow-300">宝箱を発見するとクイズが出題され、正解すると100XP！</strong></li>
                   </ul>
                 </div>
               </div>
