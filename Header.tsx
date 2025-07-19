@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tab } from './App';
 import TabButton from './TabButton';
+import PdfPrintButton from './PdfPrintButton';
 
 interface HeaderProps {
   activeTab: Tab;
@@ -22,6 +23,11 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
         backdropFilter: 'blur(4px)'
       }}
     >
+      {/* PDF Print Button - positioned at the top right */}
+      <div className="flex justify-end mb-4">
+        <PdfPrintButton className="z-10" />
+      </div>
+
       <div className="relative">
         {/* ロゴ - 絶対配置で左側に固定 */}
         <div className="absolute left-0 top-0 flex items-center h-full">
