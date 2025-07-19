@@ -1,7 +1,5 @@
 import React from 'react';
 import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
-import { MINECRAFT_COMMANDS, COMMAND_CATEGORIES } from './constants';
 
 interface PdfPrintButtonProps {
   className?: string;
@@ -10,225 +8,173 @@ interface PdfPrintButtonProps {
 const PdfPrintButton: React.FC<PdfPrintButtonProps> = ({ className }) => {
   const generatePDF = async () => {
     try {
-      // Create a new PDF document with optimized settings for Japanese text
+      // Create a new PDF document with A4 dimensions
       const pdf = new jsPDF({
         orientation: 'portrait',
         unit: 'mm',
-        format: 'a4',
-        compress: true
+        format: 'a4'
       });
 
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
-      const margin = 15; // Reduced margin for more content space
-      const contentWidth = pageWidth - 2 * margin;
-      let yPosition = margin;
+      const pageWidth = pdf.internal.pageSize.getWidth();  // 210mm
+      const pageHeight = pdf.internal.pageSize.getHeight(); // 297mm
+      const margin = 20;
+      const contentWidth = pageWidth - 2 * margin; // 170mm
+      let yPos = margin;
 
-      // Set a default font that handles Japanese better
-      // Use built-in fonts for better compatibility
-      pdf.setFont("helvetica");
+      // Use standard fonts for maximum compatibility
+      pdf.setFont("helvetica", "bold");
 
-      // Add title with romanized text to avoid encoding issues
-      pdf.setFontSize(20); // Reduced font size
-      pdf.setTextColor(220, 20, 60); // Dark red color
-      pdf.text('Minecraft Command Guide', pageWidth / 2, yPosition, { align: 'center' });
-      yPosition += 8;
+      // Main Title
+      pdf.setFontSize(18);
+      pdf.setTextColor(0, 0, 0);
+      pdf.text('MINECRAFT COMMAND GUIDE', pageWidth / 2, yPos, { align: 'center' });
+      yPos += 10;
 
-      pdf.setFontSize(16);
-      pdf.setTextColor(255, 140, 0); // Orange
-      pdf.text('Maikura Komando no Sho', pageWidth / 2, yPosition, { align: 'center' });
-      yPosition += 12;
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(12);
+      pdf.setTextColor(60, 60, 60);
+      pdf.text('Essential commands and keyboard shortcuts', pageWidth / 2, yPos, { align: 'center' });
+      yPos += 15;
 
+      // Create command data with English descriptions to avoid encoding issues
+      const commandData = [
+        {
+          category: 'WORLD SETTINGS',
+          commands: [
+            { cmd: '/time set 0', desc: 'Set time to morning/dawn (6000 ticks)' },
+            { cmd: '/weather clear', desc: 'Clear weather and stop rain/snow' }
+          ]
+        },
+        {
+          category: 'MOVEMENT & TELEPORT',
+          commands: [
+            { cmd: '/tp @p 0 0 0', desc: 'Teleport player to coordinates (0,0,0). Use F3 to see coordinates.' }
+          ]
+        },
+        {
+          category: 'WORLD EDIT COMMANDS',
+          commands: [
+            { cmd: '//wand', desc: 'Get World Edit tool (wooden axe for selecting areas)' },
+            { cmd: '//set stone', desc: 'Fill selected area with stone blocks. Replace "stone" with other block types.' },
+            { cmd: '//copy', desc: 'Copy selected area. Your position becomes the copy reference point.' },
+            { cmd: '//cut', desc: 'Cut/remove selected area and store in clipboard' },
+            { cmd: '//paste', desc: 'Paste copied/cut area at your current position' }
+          ]
+        }
+      ];
+
+      // Add keyboard section header
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(14);
+      pdf.setTextColor(0, 0, 0);
+      pdf.text('KEYBOARD SHORTCUTS', margin, yPos);
+      yPos += 8;
+
+      // Add keyboard info
+      pdf.setFont("helvetica", "normal");
       pdf.setFontSize(10);
-      pdf.setTextColor(100, 100, 100);
-      pdf.text('Keyboard layout and commands to master Minecraft!', pageWidth / 2, yPosition, { align: 'center' });
-      yPosition += 15;
-
-      // Try to capture keyboard image with optimized size
-      const keyboardElement = document.querySelector('img[alt*="キーボード"]') as HTMLImageElement;
-      if (keyboardElement) {
-        try {
-          const canvas = await html2canvas(keyboardElement, {
-            useCORS: true,
-            allowTaint: true,
-            backgroundColor: null,
-            scale: 0.5 // Reduce image quality for smaller file size
-          });
-          
-          const imgData = canvas.toDataURL('image/jpeg', 0.6);
-          const maxImgHeight = 60; // Limit image height
-          const imgWidth = contentWidth * 0.8; // Use 80% of content width
-          const imgHeight = Math.min(maxImgHeight, (canvas.height * imgWidth) / canvas.width);
-          const imgX = margin + (contentWidth - imgWidth) / 2; // Center the image
-
-          pdf.setFontSize(14);
-          pdf.setTextColor(255, 140, 0); // Orange
-          pdf.text('Keyboard Layout', margin, yPosition);
-          yPosition += 8;
-
-          pdf.addImage(imgData, 'JPEG', imgX, yPosition, imgWidth, imgHeight);
-          yPosition += imgHeight + 12;
-        } catch (error) {
-          console.warn('Failed to capture keyboard image:', error);
-          // Add placeholder text instead
-          pdf.setFontSize(14);
-          pdf.setTextColor(255, 140, 0);
-          pdf.text('Keyboard Layout', margin, yPosition);
-          yPosition += 8;
-          
-          pdf.setFontSize(9);
-          pdf.setTextColor(100, 100, 100);
-          pdf.text('(Keyboard image would appear here when available)', margin, yPosition);
-          yPosition += 15;
-        }
-      }
-
-      // Add command list with optimized layout
-      pdf.setFontSize(16);
-      pdf.setTextColor(255, 140, 0);
-      pdf.text('Command List', margin, yPosition);
-      yPosition += 10;
-
-      // Group commands by category
-      const groupedCommands = MINECRAFT_COMMANDS.reduce((acc, command) => {
-        (acc[command.category] = acc[command.category] || []).push(command);
-        return acc;
-      }, {} as Record<string, typeof MINECRAFT_COMMANDS>);
-
-      // Convert category names to romanized versions for better PDF display
-      const categoryTranslations = {
-        [COMMAND_CATEGORIES.MOVEMENT]: 'Movement Commands (Ido no Komando)',
-        [COMMAND_CATEGORIES.WORLD]: 'World Settings (World Settei)', 
-        [COMMAND_CATEGORIES.WORLD_EDIT]: 'World Edit Commands'
-      };
-
-      // Optimize layout: use two columns for commands if space allows
-      const leftColumnX = margin;
-      const rightColumnX = pageWidth / 2 + 5;
-      const columnWidth = (contentWidth - 10) / 2;
+      pdf.setTextColor(60, 60, 60);
+      const keyboardInfo = [
+        'F3: Show coordinates and debug information',
+        'F3 + H: Show advanced tooltips (item durability, etc.)',
+        'Tab: Auto-complete commands',
+        'T: Open chat/command input',
+        '↑/↓ arrows: Navigate command history'
+      ];
       
-      let currentColumn = 0; // 0 = left, 1 = right
-      let leftColumnY = yPosition;
-      let rightColumnY = yPosition;
+      keyboardInfo.forEach(info => {
+        pdf.text('• ' + info, margin, yPos);
+        yPos += 5;
+      });
+      yPos += 8;
 
-      // Add each category
-      Object.entries(COMMAND_CATEGORIES).forEach(([key, categoryName]) => {
-        const commands = groupedCommands[categoryName];
-        if (!commands) return;
+      // Add commands section
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(14);
+      pdf.setTextColor(0, 0, 0);
+      pdf.text('COMMAND REFERENCE', margin, yPos);
+      yPos += 10;
 
-        const translatedCategoryName = categoryTranslations[categoryName] || categoryName;
-        const currentY = currentColumn === 0 ? leftColumnY : rightColumnY;
-        const currentX = currentColumn === 0 ? leftColumnX : rightColumnX;
-
-        // Check if we need a new page
-        const estimatedHeight = commands.length * 12 + 15; // Rough estimate
-        if (currentY + estimatedHeight > pageHeight - margin) {
-          // If right column, try left column of new page
-          if (currentColumn === 1) {
-            pdf.addPage();
-            leftColumnY = margin;
-            rightColumnY = margin;
-            currentColumn = 0;
-          } else {
-            // Try right column first
-            if (rightColumnY + estimatedHeight <= pageHeight - margin) {
-              currentColumn = 1;
-            } else {
-              pdf.addPage();
-              leftColumnY = margin;
-              rightColumnY = margin;
-              currentColumn = 0;
-            }
-          }
+      // Process each category
+      commandData.forEach(category => {
+        // Check if we have enough space for this category (rough estimate)
+        const estimatedSpace = category.commands.length * 15 + 15;
+        if (yPos + estimatedSpace > pageHeight - margin - 20) {
+          // Not enough space, but we want everything on one page, so make text smaller
+          pdf.setFontSize(9);
         }
-
-        const finalY = currentColumn === 0 ? leftColumnY : rightColumnY;
-        const finalX = currentColumn === 0 ? leftColumnX : rightColumnX;
 
         // Category title
+        pdf.setFont("helvetica", "bold");
         pdf.setFontSize(12);
-        pdf.setTextColor(255, 140, 0);
-        pdf.text(translatedCategoryName, finalX, finalY);
-        
-        let categoryY = finalY + 6;
+        pdf.setTextColor(0, 100, 200); // Blue color for categories
+        pdf.text(category.category, margin, yPos);
+        yPos += 8;
 
         // Commands in this category
-        commands.forEach((command) => {
-          // Check if we need to switch columns or pages
-          if (categoryY + 10 > pageHeight - margin) {
-            if (currentColumn === 0) {
-              currentColumn = 1;
-              categoryY = rightColumnY;
-            } else {
-              pdf.addPage();
-              currentColumn = 0;
-              leftColumnY = margin;
-              rightColumnY = margin;
-              categoryY = margin;
-            }
-          }
+        category.commands.forEach(cmd => {
+          // Command text in monospace
+          pdf.setFont("courier", "bold");
+          pdf.setFontSize(10);
+          pdf.setTextColor(0, 150, 0); // Green for commands
+          pdf.text(cmd.cmd, margin + 5, yPos);
+          yPos += 5;
 
-          const cmdX = currentColumn === 0 ? leftColumnX : rightColumnX;
-
-          // Command - using monospace for better readability
-          pdf.setFont("courier");
+          // Description
+          pdf.setFont("helvetica", "normal");
           pdf.setFontSize(9);
-          pdf.setTextColor(0, 150, 0); // Green
-          pdf.text(command.command, cmdX + 2, categoryY);
-          categoryY += 4;
-
-          // Description with text wrapping - convert to romaji for better display
-          pdf.setFont("helvetica");
-          pdf.setFontSize(8);
-          pdf.setTextColor(60, 60, 60);
+          pdf.setTextColor(40, 40, 40);
           
-          // Simplified description in English to avoid encoding issues
-          let description = command.description;
-          // Basic Japanese to romanized conversions for common terms
-          description = description.replace(/時間/g, 'jikan (time)');
-          description = description.replace(/朝/g, 'asa (morning)');
-          description = description.replace(/天気/g, 'tenki (weather)');
-          description = description.replace(/晴れ/g, 'hare (clear)');
-          description = description.replace(/テレポート/g, 'teleport');
-          description = description.replace(/コマンド/g, 'command');
-          description = description.replace(/座標/g, 'zahyo (coordinates)');
-          description = description.replace(/確認/g, 'kakunin (check)');
-          description = description.replace(/道具/g, 'dougu (tool)');
-          description = description.replace(/範囲/g, 'han-i (range)');
-          description = description.replace(/ブロック/g, 'block');
-          description = description.replace(/コピー/g, 'copy');
-          description = description.replace(/基準点/g, 'kijunten (reference point)');
-          description = description.replace(/切り取り/g, 'kiritori (cut)');
-          description = description.replace(/貼り付け/g, 'haritsuke (paste)');
-
-          const lines = pdf.splitTextToSize(description, columnWidth - 4);
-          pdf.text(lines, cmdX + 2, categoryY);
-          categoryY += lines.length * 3 + 2;
+          // Wrap text if too long
+          const lines = pdf.splitTextToSize(cmd.desc, contentWidth - 10);
+          pdf.text(lines, margin + 5, yPos);
+          yPos += lines.length * 4 + 3;
         });
-
-        // Update column positions
-        if (currentColumn === 0) {
-          leftColumnY = categoryY + 4;
-        } else {
-          rightColumnY = categoryY + 4;
-          currentColumn = 0; // Switch back to left column for next category
-        }
+        yPos += 5; // Space between categories
       });
 
-      // Add footer on the last page
-      const footerY = pageHeight - 8;
-      pdf.setFontSize(7);
+      // Add usage tips section if we have space
+      if (yPos < pageHeight - margin - 40) {
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(12);
+        pdf.setTextColor(200, 100, 0); // Orange for tips
+        pdf.text('USAGE TIPS', margin, yPos);
+        yPos += 8;
+
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(9);
+        pdf.setTextColor(60, 60, 60);
+        const tips = [
+          '• All commands start with / or // (for World Edit)',
+          '• Use Tab key to auto-complete command names',
+          '• @p = nearest player, @s = yourself, @a = all players',
+          '• World Edit requires the World Edit plugin/mod',
+          '• Always make backups before using World Edit commands'
+        ];
+
+        tips.forEach(tip => {
+          if (yPos < pageHeight - margin - 10) {
+            pdf.text(tip, margin, yPos);
+            yPos += 4.5;
+          }
+        });
+      }
+
+      // Add footer
+      const footerY = pageHeight - 10;
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(8);
       pdf.setTextColor(120, 120, 120);
-      pdf.text('© 2024 Minecraft Command Guide', pageWidth / 2, footerY, { align: 'center' });
+      pdf.text('Minecraft Command Guide - Generated from minecraft-helper', pageWidth / 2, footerY, { align: 'center' });
 
       // Save the PDF
       pdf.save('minecraft-helper-guide.pdf');
       
       // Show success message
-      alert('PDFファイルがダウンロードされました！');
+      alert('PDF file downloaded successfully! / PDFファイルがダウンロードされました！');
     } catch (error) {
       console.error('PDF generation failed:', error);
-      alert('PDFの生成に失敗しました。もう一度お試しください。');
+      alert('Failed to generate PDF. Please try again. / PDFの生成に失敗しました。');
     }
   };
 
