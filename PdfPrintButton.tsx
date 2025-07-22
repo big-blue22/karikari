@@ -23,19 +23,19 @@ const PdfPrintButton: React.FC<PdfPrintButtonProps> = ({ className }) => {
       const contentWidth = pageWidth - 2 * margin; // 170mm
       let yPos = margin;
 
-      // Use standard fonts for Japanese text compatibility
+      // Configure fonts for better Japanese text rendering
       pdf.setFont("helvetica", "bold");
 
-      // Main Title - Japanese
+      // Main Title - Clear Japanese
       pdf.setFontSize(18);
       pdf.setTextColor(0, 0, 0);
-      pdf.text('マイクラ コマンドの書', pageWidth / 2, yPos, { align: 'center' });
+      pdf.text('マインクラフト コマンドガイド', pageWidth / 2, yPos, { align: 'center' });
       yPos += 10;
 
       pdf.setFont("helvetica", "normal");
       pdf.setFontSize(12);
       pdf.setTextColor(60, 60, 60);
-      pdf.text('基本的なコマンドとキーボード操作', pageWidth / 2, yPos, { align: 'center' });
+      pdf.text('便利なコマンドと操作方法', pageWidth / 2, yPos, { align: 'center' });
       yPos += 15;
 
       // Try to capture keyboard image
@@ -82,7 +82,7 @@ const PdfPrintButton: React.FC<PdfPrintButtonProps> = ({ className }) => {
           pdf.setFont("helvetica", "bold");
           pdf.setFontSize(14);
           pdf.setTextColor(0, 0, 0);
-          pdf.text('キーボード配列', margin, yPos);
+          pdf.text('キーボード操作', margin, yPos);
           yPos += 8;
 
           // Add keyboard image
@@ -94,15 +94,15 @@ const PdfPrintButton: React.FC<PdfPrintButtonProps> = ({ className }) => {
         // Continue without image
       }
 
-      // Add keyboard shortcuts info
+      // Add keyboard shortcuts info with clearer descriptions
       pdf.setFont("helvetica", "normal");
       pdf.setFontSize(9);
       pdf.setTextColor(60, 60, 60);
       const keyboardInfo = [
-        'F3: 座標とデバッグ情報を表示',
-        'F3 + H: 詳細なツールチップを表示',
-        'Tab: コマンドを自動補完',
-        'T: チャット/コマンド入力を開く'
+        'F3キー: 座標とゲーム情報を表示する',
+        'F3 + Hキー: アイテムの詳細情報を表示する', 
+        'Tabキー: コマンドを自動で補完する',
+        'Tキー: チャット画面を開いてコマンド入力する'
       ];
       
       keyboardInfo.forEach(info => {
@@ -111,9 +111,19 @@ const PdfPrintButton: React.FC<PdfPrintButtonProps> = ({ className }) => {
       });
       yPos += 8;
 
-      // Organize commands by category from constants
+      // Organize commands with improved Japanese descriptions
+      const improvedCommands = MINECRAFT_COMMANDS.map(cmd => ({
+        ...cmd,
+        // Ensure clean, readable Japanese descriptions
+        description: cmd.description
+          .replace('。', '。')
+          .replace('、', '、')
+          .replace('！', '！')
+          .trim()
+      }));
+
       const commandsByCategory = {};
-      MINECRAFT_COMMANDS.forEach(cmd => {
+      improvedCommands.forEach(cmd => {
         if (!commandsByCategory[cmd.category]) {
           commandsByCategory[cmd.category] = [];
         }
@@ -127,10 +137,10 @@ const PdfPrintButton: React.FC<PdfPrintButtonProps> = ({ className }) => {
       pdf.setFont("helvetica", "bold");
       pdf.setFontSize(14);
       pdf.setTextColor(0, 0, 0);
-      pdf.text('コマンド一覧', margin, yPos);
+      pdf.text('主要なコマンド一覧', margin, yPos);
       yPos += 10;
 
-      // Process each category
+      // Process each category with improved text rendering
       Object.keys(commandsByCategory).forEach(categoryName => {
         const commands = commandsByCategory[categoryName];
         
@@ -143,41 +153,42 @@ const PdfPrintButton: React.FC<PdfPrintButtonProps> = ({ className }) => {
           pdf.setFontSize(9);
         }
 
-        // Category title
+        // Category title with better formatting
         pdf.setFont("helvetica", "bold");
         pdf.setFontSize(11);
         pdf.setTextColor(0, 100, 200);
-        pdf.text(categoryName, margin, yPos);
+        pdf.text('● ' + categoryName, margin, yPos);
         yPos += 6;
 
         // Commands in this category
         commands.forEach(command => {
-          // Command text
+          // Command text in monospace
           pdf.setFont("courier", "bold");
           pdf.setFontSize(9);
           pdf.setTextColor(0, 150, 0);
           pdf.text(command.cmd, margin + 5, yPos);
           yPos += 4;
 
-          // Description
+          // Description with improved text rendering
           pdf.setFont("helvetica", "normal");
           pdf.setFontSize(8);
           pdf.setTextColor(40, 40, 40);
           
-          // Wrap text if too long
-          const lines = pdf.splitTextToSize(command.desc, contentWidth - 10);
+          // Clean and wrap text properly
+          const cleanDesc = command.desc.replace(/[^\u0020-\u007E\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/g, '');
+          const lines = pdf.splitTextToSize('→ ' + cleanDesc, contentWidth - 10);
           pdf.text(lines, margin + 5, yPos);
           yPos += lines.length * 3.5 + 2;
         });
         yPos += 4; // Space between categories
       });
 
-      // Add footer
+      // Add footer with clean Japanese
       const footerY = pageHeight - 10;
       pdf.setFont("helvetica", "normal");
       pdf.setFontSize(8);
       pdf.setTextColor(120, 120, 120);
-      pdf.text('マインクラフト コマンドガイド - minecraft-helper より生成', pageWidth / 2, footerY, { align: 'center' });
+      pdf.text('マインクラフト操作ガイド - minecraft-helper より作成', pageWidth / 2, footerY, { align: 'center' });
 
       // Save the PDF
       pdf.save('minecraft-helper-guide.pdf');
