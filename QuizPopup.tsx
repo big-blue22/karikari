@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { QuizState } from './types';
+import Furigana from './Furigana';
 
 interface QuizPopupProps {
   quizState: QuizState;
@@ -78,14 +79,14 @@ const QuizPopup: React.FC<QuizPopupProps> = ({ quizState, onClose }) => {
           marginBottom: '8px',
           textShadow: '2px 2px 4px rgba(0,0,0,0.8)'
         }}>
-          🎯 宝箱クイズ！ 🎯
+          🎯 <Furigana>宝箱クイズ！</Furigana> 🎯
         </h2>
         <p style={{ 
           fontSize: '16px', 
           color: '#87CEEB', 
           marginBottom: '24px' 
         }}>
-          正解すると100XPもらえるよ！
+          <Furigana>正解すると100XPもらえるよ！</Furigana>
         </p>
 
         <div style={{
@@ -100,7 +101,7 @@ const QuizPopup: React.FC<QuizPopupProps> = ({ quizState, onClose }) => {
             marginBottom: '20px',
             color: '#FFFFFF'
           }}>
-            {quizState.question.question}
+            <Furigana>{quizState.question.question}</Furigana>
           </h3>
 
           <div style={{ display: 'grid', gap: '12px' }}>
@@ -155,11 +156,11 @@ const QuizPopup: React.FC<QuizPopupProps> = ({ quizState, onClose }) => {
               {isCorrect ? '🎉' : '😅'}
             </div>
             <div style={{ fontSize: '20px', fontWeight: 'bold' }}>
-              {isCorrect ? '正解！100XP獲得！' : '残念！不正解...'}
+              {isCorrect ? <Furigana>正解！100XP獲得！</Furigana> : <Furigana>残念！不正解...</Furigana>}
             </div>
             {!isCorrect && (
               <div style={{ fontSize: '14px', color: '#ccc', marginTop: '8px' }}>
-                正解: {quizState.question.options[quizState.question.correctAnswer]}
+                <Furigana>正解</Furigana>: {quizState.question.options[quizState.question.correctAnswer]}
               </div>
             )}
           </div>
@@ -179,7 +180,7 @@ const QuizPopup: React.FC<QuizPopupProps> = ({ quizState, onClose }) => {
               fontWeight: 'bold'
             }}
           >
-            {selectedAnswer !== null ? '答える！' : '選択肢を選んでね'}
+            {selectedAnswer !== null ? <Furigana>答える！</Furigana> : <Furigana>選択肢を選んでね</Furigana>}
           </button>
         )}
       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Furigana from './Furigana';
 
 const KeyboardLayout: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -8,9 +9,11 @@ const KeyboardLayout: React.FC = () => {
 
   return (
     <div className="text-white">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-orange-400 drop-shadow-md">キーボード配列（はいれつ）</h2>
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-orange-400 drop-shadow-md">
+        <Furigana>キーボード配列</Furigana>
+      </h2>
       <p className="mb-6 text-base sm:text-lg text-gray-200">
-        マイクラをPCで遊ぶときの基本のキーボード操作だ！まずはこれを覚えよう！
+        <Furigana>マイクラをPCで遊ぶときの基本のキーボード操作だ！まずはこれを覚えよう！</Furigana>
       </p>
       <div className="bg-black/30 border-2 border-orange-400/40 rounded-lg p-4 sm:p-8 flex flex-col justify-center items-center min-h-[300px] sm:min-h-[400px] text-center shadow-inner shadow-orange-400/10">
         <button 
@@ -25,13 +28,13 @@ const KeyboardLayout: React.FC = () => {
           />
         </button>
         <p className="mt-2 text-gray-300 text-xs sm:text-sm">
-          画像（がぞう）をタップすると拡大（かくだい）できます
+          <Furigana>画像をタップすると拡大できます</Furigana>
         </p>
         <p className="mt-4 text-orange-300 text-lg font-bold">
-          ここにキーボードの画像が入ります
+          <Furigana>ここにキーボードの画像が入ります</Furigana>
         </p>
         <p className="text-gray-400 text-sm sm:text-base mt-1">
-          (先生へ：この画像を実際のキーボード表に差し替えてください)
+          <Furigana>(先生へ：この画像を実際のキーボード表に差替えてください)</Furigana>
         </p>
       </div>
 
@@ -58,7 +61,7 @@ const KeyboardLayout: React.FC = () => {
               className="rounded-lg shadow-2xl border-4 border-orange-400 max-w-full max-h-[90vh] object-contain"
             />
             <p className="text-center text-white mt-4 text-lg">
-              キーボード配列（拡大表示）
+              <Furigana>キーボード配列（拡大表示）</Furigana>
             </p>
           </div>
         </div>

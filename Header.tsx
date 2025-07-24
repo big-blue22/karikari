@@ -2,6 +2,7 @@ import React from 'react';
 import { Tab } from './App';
 import TabButton from './TabButton';
 import { generatePDF } from './pdfGenerator';
+import Furigana from './Furigana';
 
 interface HeaderProps {
   activeTab: Tab;
@@ -46,10 +47,10 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
               color: '#FFD700'
             }}
           >
-            マイクラ<br className="sm:hidden" /> コマンドの書
+            <Furigana>マイクラ</Furigana><br className="sm:hidden" /> <Furigana>コマンドの書</Furigana>
           </h1>
           <p className="mt-2 text-xs sm:text-base text-yellow-400 font-bold">
-            キーボードとコマンドをマスターして、キミもマイクラ博士だ！
+            <Furigana>キーボードとコマンドをマスターして、キミもマイクラ博士だ！</Furigana>
           </p>
         </div>
       </div>
@@ -59,19 +60,19 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
           onClick={() => onTabChange(Tab.Keyboard)}
           isActive={activeTab === Tab.Keyboard}
         >
-          キーボード (Keyboard)
+          <Furigana>キーボード</Furigana> (Keyboard)
         </TabButton>
         <TabButton
           onClick={() => onTabChange(Tab.Commands)}
           isActive={activeTab === Tab.Commands}
         >
-          コマンド一覧 (Commands)
+          <Furigana>コマンド一覧</Furigana> (Commands)
         </TabButton>
         <TabButton
           onClick={() => onTabChange(Tab.Mining)}
           isActive={activeTab === Tab.Mining}
         >
-          採掘 (Mining)
+          <Furigana>採掘</Furigana> (Mining)
         </TabButton>
         <TabButton
           onClick={() => {
@@ -82,7 +83,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
           isActive={false}
           isActionButton={true}
         >
-          PDF出力
+          <Furigana>PDF出力</Furigana>
         </TabButton>
       </nav>
     </header>

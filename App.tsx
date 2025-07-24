@@ -4,6 +4,7 @@ import KeyboardLayout from './KeyboardLayout';
 import { CommandList } from './CommandList';
 import MiningSystem from './MiningSystem';
 import { MINECRAFT_COMMANDS, COMMAND_CATEGORIES } from './constants';
+import Furigana from './Furigana';
 
 export enum Tab {
   Keyboard = 'keyboard',
@@ -800,41 +801,41 @@ const App: React.FC = () => {
                 color: '#FFD700',
                 textShadow: '2px 2px 4px rgba(0,0,0,0.8)'
               }}>
-                ⛏️ マインクラフト風採掘システム ⛏️
+                ⛏️ <Furigana>マインクラフト風採掘システム</Furigana> ⛏️
               </h2>
               <div className="max-w-2xl mx-auto space-y-4">
                 <div className="bg-black/50 p-4 rounded-lg border-2 border-gray-500">
-                  <h3 className="text-xl font-bold mb-2 text-yellow-300">🎯 遊び方</h3>
-                  <p className="mb-2">ねずみ色の石エリア（画面下部）を<strong className="text-red-300">右クリック長押し</strong>で採掘できます！</p>
-                  <p className="text-sm text-blue-300">右クリックを長押しすると採掘が始まり、掘り終わると石が再生します。</p>
+                  <h3 className="text-xl font-bold mb-2 text-yellow-300">🎯 <Furigana>遊び方</Furigana></h3>
+                  <p className="mb-2"><Furigana>ねずみ色の石エリア（画面下部）を</Furigana><strong className="text-red-300"><Furigana>右クリック長押</Furigana></strong><Furigana>で採掘できます！</Furigana></p>
+                  <p className="text-sm text-blue-300"><Furigana>右クリックを長押しすると採掘が始まり、掘り終わると石が再生します。</Furigana></p>
                 </div>
                 
                 <div className="bg-black/50 p-4 rounded-lg border-2 border-gray-500">
-                  <h3 className="text-xl font-bold mb-2 text-yellow-300">💎 鉱石の種類</h3>
+                  <h3 className="text-xl font-bold mb-2 text-yellow-300">💎 <Furigana>鉱石の種類</Furigana></h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
-                    <div>🟢 エメラルド (1%) - 100XP</div>
-                    <div>💎 ダイヤモンド (3%) - 50XP</div>
-                    <div>🔷 ラピスラズリ (5%) - 25XP</div>
-                    <div>✨ 金鉱石 (5%) - 20XP</div>
-                    <div>🔴 レッドストーン (8%) - 15XP</div>
-                    <div>⚒️ 鉄鉱石 (12%) - 10XP</div>
-                    <div>⚫ 石炭 (15%) - 8XP</div>
-                    <div>🟤 銅鉱石 (15%) - 5XP</div>
-                    <div>🗿 石 (26%) - 1XP</div>
-                    <div>📦 宝箱 (10%) - クイズ100XP</div>
+                    <div>🟢 <Furigana>エメラルド</Furigana> (1%) - 100XP</div>
+                    <div>💎 <Furigana>ダイヤモンド</Furigana> (3%) - 50XP</div>
+                    <div>🔷 <Furigana>ラピスラズリ</Furigana> (5%) - 25XP</div>
+                    <div>✨ <Furigana>金鉱石</Furigana> (5%) - 20XP</div>
+                    <div>🔴 <Furigana>レッドストーン</Furigana> (8%) - 15XP</div>
+                    <div>⚒️ <Furigana>鉄鉱石</Furigana> (12%) - 10XP</div>
+                    <div>⚫ <Furigana>石炭</Furigana> (15%) - 8XP</div>
+                    <div>🟤 <Furigana>銅鉱石</Furigana> (15%) - 5XP</div>
+                    <div>🗿 <Furigana>石</Furigana> (26%) - 1XP</div>
+                    <div>📦 <Furigana>宝箱</Furigana> (10%) - <Furigana>クイズ</Furigana>100XP</div>
                   </div>
                 </div>
                 
                 <div className="bg-black/50 p-4 rounded-lg border-2 border-gray-500">
-                  <h3 className="text-xl font-bold mb-2 text-yellow-300">✨ 特徴</h3>
+                  <h3 className="text-xl font-bold mb-2 text-yellow-300">✨ <Furigana>特徴</Furigana></h3>
                   <ul className="text-sm space-y-1 text-left">
-                    <li>• 鉱石発見時にエフェクトが表示されます</li>
-                    <li>• 発掘した鉱石は画面右上のインベントリに保存</li>
-                    <li>• <strong className="text-green-300">鉱石を掘ると経験値を獲得できます</strong></li>
-                    <li>• 経験値バーがいっぱいになるとレベルアップ！</li>
-                    <li>• 掘った石ブロックは5秒後に自動で再生</li>
-                    <li>• レアな鉱石ほど発見確率が低く価値が高い</li>
-                    <li>• <strong className="text-yellow-300">宝箱を発見するとクイズが出題され、正解すると100XP！</strong></li>
+                    <li>• <Furigana>鉱石発見時にエフェクトが表示されます</Furigana></li>
+                    <li>• <Furigana>発掘した鉱石は画面右上のインベントリに保存</Furigana></li>
+                    <li>• <strong className="text-green-300"><Furigana>鉱石を掘ると経験値を獲得できます</Furigana></strong></li>
+                    <li>• <Furigana>経験値バーがいっぱいになるとレベルアップ！</Furigana></li>
+                    <li>• <Furigana>掘った石ブロックは5秒後に自動で再生</Furigana></li>
+                    <li>• <Furigana>レアな鉱石ほど発見確率が低く価値が高い</Furigana></li>
+                    <li>• <strong className="text-yellow-300"><Furigana>宝箱を発見するとクイズが出題され、正解すると100XP！</Furigana></strong></li>
                   </ul>
                 </div>
               </div>
@@ -844,7 +845,7 @@ const App: React.FC = () => {
         
         <footer className="text-center mt-8 text-white drop-shadow-lg">
           <p className="text-lg font-bold bg-black/50 inline-block px-4 py-2 rounded-lg border-2 border-yellow-400/50">
-            &copy; 2024 マイクラ. たのしくあそんで、たくさん学ぼう！
+            &copy; 2024 <Furigana>マイクラ</Furigana>. <Furigana>たのしくあそんで、たくさん学ぼう！</Furigana>
           </p>
         </footer>
       </div>
