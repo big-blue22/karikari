@@ -845,7 +845,7 @@ const App: React.FC = () => {
         
         <footer className="text-center mt-8 text-white drop-shadow-lg">
           <p className="text-lg font-bold bg-black/50 inline-block px-4 py-2 rounded-lg border-2 border-yellow-400/50">
-            &copy; 2025 <Furigana>マイクラ</Furigana>. <Furigana>たのしくあそんで、たくさん学ぼう！</Furigana>
+            &copy; 2024 <Furigana>マイクラ</Furigana>. <Furigana>たのしくあそんで、たくさん学ぼう！</Furigana>
           </p>
         </footer>
       </div>

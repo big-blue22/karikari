@@ -83,7 +83,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
           isActive={false}
           isActionButton={true}
         >
-          <Furigana>PDF印刷</Furigana>
+          <Furigana>PDF出力</Furigana>
         </TabButton>
       </nav>
     </header>
