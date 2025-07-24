@@ -28,8 +28,8 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
         {/* ロゴ - 絶対配置で左側に固定 */}
         <div className="absolute left-0 top-0 flex items-center h-full">
           <img 
-            src="https://picsum.photos/seed/minecraftlogo/120" 
-            alt="ロゴプレースホルダー"
+            src="./ifロゴ.png" 
+            alt="ifロゴ"
             className="w-16 h-16 sm:w-24 sm:h-24 rounded-lg"
             style={{
               border: '4px solid #FFD700',
@@ -77,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
         <TabButton
           onClick={() => {
             // 現在のキーボード画像URLを取得
-            const keyboardImage = 'https://picsum.photos/seed/keyboard/1200/600';
+            const keyboardImage = './キーボード画像.jpg';
             generatePDF(keyboardImage);
           }}
           isActive={false}
