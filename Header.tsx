@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tab } from './App';
 import TabButton from './TabButton';
+import { generatePDF } from './pdfGenerator';
 
 interface HeaderProps {
   activeTab: Tab;
@@ -71,6 +72,16 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
           isActive={activeTab === Tab.Mining}
         >
           採掘 (Mining)
+        </TabButton>
+        <TabButton
+          onClick={() => {
+            // 現在のキーボード画像URLを取得
+            const keyboardImage = 'https://picsum.photos/seed/keyboard/1200/600';
+            generatePDF(keyboardImage);
+          }}
+          isActive={false}
+        >
+          PDF出力
         </TabButton>
       </nav>
     </header>
