@@ -80,6 +80,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
             generatePDF(keyboardImage);
           }}
           isActive={false}
+          isActionButton={true}
         >
           PDF出力
         </TabButton>
