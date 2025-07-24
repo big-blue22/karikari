@@ -1,5 +1,6 @@
 import React from 'react';
 import { Command } from './types';
+import Furigana from './Furigana';
 
 interface CommandCardProps {
   command: Command;
@@ -13,7 +14,7 @@ const CommandCard: React.FC<CommandCardProps> = ({ command }) => {
           {command.command}
         </p>
         <p className="text-gray-200 text-sm">
-          {command.description}
+          <Furigana>{command.description}</Furigana>
         </p>
       </div>
     </div>
