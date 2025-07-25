@@ -873,7 +873,7 @@ const App: React.FC = () => {
                   <ul className="text-sm space-y-1 text-left">
                     <li>• <Furigana>たくさん採掘して、経験値をためよう!</Furigana></li>
                     <li><Furigana>経験値がいっぱいになるとレベルアップ!</Furigana></li>
-                    <li>• <Furigana>そして... レベル5に到達した者だけが読める、秘密のメッセージが隠されているぞ!</Furigana></li>
+                    <li>• <Furigana>そして... レベル3に到達した者だけが読める、秘密のメッセージが隠されているぞ!</Furigana></li>
                   </ul>
                 </div>
                 
