@@ -8,7 +8,7 @@ interface TabButtonProps {
 }
 
 const TabButton: React.FC<TabButtonProps> = ({ onClick, isActive, children, isActionButton = false }) => {
-  const baseClasses = "px-3 py-2 sm:px-6 sm:py-3 text-sm sm:text-lg font-bold rounded-md transition-all duration-200 ease-in-out transform focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-opacity-50";
+  const baseClasses = "px-2 py-1 sm:px-3 sm:py-2 md:px-6 md:py-3 text-xs sm:text-sm md:text-lg font-bold rounded-md transition-all duration-200 ease-in-out transform focus:outline-none focus:ring-4 focus:ring-yellow-500 focus:ring-opacity-50";
   
   const activeStyle = {
     background: 'linear-gradient(135deg, #6B4423 0%, #8B4513 25%, #D2691E 50%, #8B4513 75%, #6B4423 100%)',
