@@ -3,6 +3,8 @@ import { Tab } from './App';
 import TabButton from './TabButton';
 import { generatePDF } from './pdfGenerator';
 import Furigana from './Furigana';
+import ifLogo from '/public/ifロゴ.png';
+import keyboardImage from '/public/キーボード画像.jpg';
 
 interface HeaderProps {
   activeTab: Tab;
@@ -28,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
         {/* ロゴ - 絶対配置で左側に固定 */}
         <div className="absolute left-0 top-0 flex items-center h-full">
           <img 
-            src="./ifロゴ.png" 
+            src={ifLogo} 
             alt="ifロゴ"
             className="w-16 h-16 sm:w-24 sm:h-24 rounded-lg"
             style={{
@@ -77,8 +79,8 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
         <TabButton
           onClick={() => {
             // 現在のキーボード画像URLを取得
-            const keyboardImage = './キーボード画像.jpg';
-            generatePDF(keyboardImage);
+            const keyboardImg = keyboardImage;
+            generatePDF(keyboardImg);
           }}
           isActive={false}
           isActionButton={true}

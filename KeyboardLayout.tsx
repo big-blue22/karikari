@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Furigana from './Furigana';
+import keyboardImage from '/public/キーボード画像.jpg';
 
 const KeyboardLayout: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -22,7 +23,7 @@ const KeyboardLayout: React.FC = () => {
           aria-label="キーボード配列の画像を拡大表示"
         >
           <img 
-            src="./キーボード画像.jpg" 
+            src={keyboardImage} 
             alt="キーボード配列" 
             className="rounded-md shadow-lg border-2 border-orange-400/50 w-full h-auto hover:shadow-orange-400/40"
           />
@@ -56,7 +57,7 @@ const KeyboardLayout: React.FC = () => {
               ×
             </button>
             <img 
-              src="./キーボード画像.jpg" 
+              src={keyboardImage} 
               alt="キーボード配列の拡大画像" 
               className="rounded-lg shadow-2xl border-4 border-orange-400 max-w-full max-h-[90vh] object-contain"
             />
