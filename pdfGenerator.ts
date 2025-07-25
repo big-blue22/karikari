@@ -1,6 +1,7 @@
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { MINECRAFT_COMMANDS } from './constants';
+import ifLogo from '/public/ifロゴ.png';
 
 export const generatePDF = async (keyboardImageUrl: string) => {
   const pdf = new jsPDF('p', 'mm', 'a4');
@@ -27,7 +28,7 @@ export const generatePDF = async (keyboardImageUrl: string) => {
     
     // ロゴ画像
     const logo = document.createElement('img');
-    logo.src = './ifロゴ.png';
+    logo.src = ifLogo;
     logo.style.width = '80px';
     logo.style.height = '80px';
     logo.style.borderRadius = '8px';
