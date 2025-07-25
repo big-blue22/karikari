@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { LevelUpPopup } from './types';
 
 interface LevelUpPopupProps {
@@ -7,6 +7,15 @@ interface LevelUpPopupProps {
 }
 
 const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) => {
+  const [showLevel3Message, setShowLevel3Message] = useState(false);
+  
+  // Reset message state when popup visibility changes
+  useEffect(() => {
+    if (!popup.isVisible) {
+      setShowLevel3Message(false);
+    }
+  }, [popup.isVisible]);
+  
   if (!popup.isVisible) return null;
 
   return (
@@ -85,13 +94,103 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
           style={{
             fontSize: '16px',
             color: '#E0E0E0',
-            marginBottom: popup.newLevel === 5 ? '16px' : '24px',
+            marginBottom: popup.newLevel === 3 || popup.newLevel === 5 ? '16px' : '24px',
             lineHeight: '1.5'
           }}
         >
           おめでとうございます！<br />
           採掘スキルが向上しました！
         </p>
+
+        {/* Interactive Secret Message for Level 3 */}
+        {popup.newLevel === 3 && !showLevel3Message && (
+          <div 
+            style={{
+              marginBottom: '24px'
+            }}
+          >
+            <button
+              onClick={() => setShowLevel3Message(true)}
+              style={{
+                backgroundColor: '#FFD700',
+                border: '3px solid #FFA500',
+                borderRadius: '12px',
+                color: '#8B4513',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                padding: '16px 24px',
+                cursor: 'pointer',
+                boxShadow: 'inset 2px 2px 0 rgba(255,255,255,0.4), inset -2px -2px 0 rgba(0,0,0,0.2), 0 6px 12px rgba(0,0,0,0.3)',
+                transition: 'all 0.2s ease',
+                textShadow: '1px 1px 2px rgba(139, 69, 19, 0.3)',
+                animation: 'buttonGlow 2s ease-in-out infinite alternate',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                margin: '0 auto'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.backgroundColor = '#FFDC00';
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.backgroundColor = '#FFD700';
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+              }}
+              onMouseDown={(e) => {
+                e.currentTarget.style.transform = 'translateY(1px) scale(0.98)';
+                e.currentTarget.style.boxShadow = 'inset 2px 2px 0 rgba(0,0,0,0.2), inset -2px -2px 0 rgba(255,255,255,0.4), 0 3px 6px rgba(0,0,0,0.3)';
+              }}
+              onMouseUp={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.02)';
+                e.currentTarget.style.boxShadow = 'inset 2px 2px 0 rgba(255,255,255,0.4), inset -2px -2px 0 rgba(0,0,0,0.2), 0 6px 12px rgba(0,0,0,0.3)';
+              }}
+            >
+              🌟 秘密のメッセージを読む 🌟
+            </button>
+          </div>
+        )}
+
+        {/* Secret Message for Level 3 - Revealed */}
+        {popup.newLevel === 3 && showLevel3Message && (
+          <div 
+            style={{
+              background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.1))',
+              border: '2px solid #FFD700',
+              borderRadius: '8px',
+              padding: '16px',
+              marginBottom: '24px',
+              animation: 'secretReveal 0.8s ease-out, secretGlow 2s ease-in-out infinite alternate 0.8s'
+            }}
+          >
+            <div 
+              style={{
+                fontSize: '20px',
+                fontWeight: 'bold',
+                color: '#FFD700',
+                textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
+                marginBottom: '8px'
+              }}
+            >
+              🌟 おめでとうメッセージ 🌟
+            </div>
+            <p 
+              style={{
+                fontSize: '14px',
+                color: '#FFF8DC',
+                textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
+                lineHeight: '1.4'
+              }}
+            >
+              おめでとうございます！<br />
+              レベル3に到達しました！<br />
+              採掘の基本をマスターしつつあります。<br />
+              <span style={{ color: '#FFD700', fontWeight: 'bold' }}>
+                この調子で頑張って！
+              </span>
+            </p>
+          </div>
+        )}
 
         {/* Secret Message for Level 5 */}
         {popup.newLevel === 5 && (
@@ -218,6 +317,26 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
             }
             100% { 
               box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), inset 0 0 15px rgba(255, 215, 0, 0.2);
+            }
+          }
+          
+          @keyframes buttonGlow {
+            0% { 
+              box-shadow: inset 2px 2px 0 rgba(255,255,255,0.4), inset -2px -2px 0 rgba(0,0,0,0.2), 0 6px 12px rgba(0,0,0,0.3), 0 0 10px rgba(255, 215, 0, 0.3);
+            }
+            100% { 
+              box-shadow: inset 2px 2px 0 rgba(255,255,255,0.4), inset -2px -2px 0 rgba(0,0,0,0.2), 0 6px 12px rgba(0,0,0,0.3), 0 0 20px rgba(255, 215, 0, 0.6);
+            }
+          }
+          
+          @keyframes secretReveal {
+            0% { 
+              opacity: 0;
+              transform: scale(0.8) translateY(20px);
+            }
+            100% { 
+              opacity: 1;
+              transform: scale(1) translateY(0);
             }
           }
         `}

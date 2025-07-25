@@ -237,9 +237,9 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
     }
   }, [miningState.isMinning, miningState.startTime, completeMining]);
 
-  // 右クリック開始
+  // 左クリック開始
   const handleMouseDown = useCallback((e: React.MouseEvent, area: MiningArea) => {
-    if (e.button !== 2) return; // 右クリックのみ
+    if (e.button !== 0) return; // 左クリックのみ
     if (!area.isRegenerated || miningState.isMinning) return;
     
     e.preventDefault();
@@ -256,7 +256,7 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
     }, 100); // 100ms後に採掘開始
   }, [miningState.isMinning]);
 
-  // 右クリック終了
+  // 左クリック終了
   const handleMouseUp = useCallback(() => {
     if (longPressRef.current) {
       clearTimeout(longPressRef.current);
@@ -273,16 +273,16 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
     }
   }, [miningState.isMinning]);
 
-  // レベルアップポップアップの自動クローズ
-  useEffect(() => {
-    if (levelUpPopup.isVisible) {
-      const timer = setTimeout(() => {
-        setLevelUpPopup(prev => ({ ...prev, isVisible: false }));
-      }, EXPERIENCE_CONFIG.LEVEL_UP_POPUP_DURATION);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [levelUpPopup.isVisible]);
+  // レベルアップポップアップの自動クローズ（無効化）
+  // useEffect(() => {
+  //   if (levelUpPopup.isVisible) {
+  //     const timer = setTimeout(() => {
+  //       setLevelUpPopup(prev => ({ ...prev, isVisible: false }));
+  //     }, EXPERIENCE_CONFIG.LEVEL_UP_POPUP_DURATION);
+  //     
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [levelUpPopup.isVisible]);
 
   // 採掘アニメーション更新
   useEffect(() => {
@@ -317,6 +317,7 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
 
   return (
     <div className={className}>
+
       {/* 採掘エリア */}
       <div
         ref={containerRef}

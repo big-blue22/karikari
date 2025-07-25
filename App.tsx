@@ -797,6 +797,48 @@ const App: React.FC = () => {
           {activeTab === Tab.Commands && <CommandList commands={MINECRAFT_COMMANDS} categories={COMMAND_CATEGORIES} />}
           {activeTab === Tab.Mining && (
             <div className="text-center p-8 text-white">
+              {/* ヒント吹き出し - マイニングタイトルの直上に表示 */}
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginBottom: '8px'
+                }}
+              >
+                <div
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.95), rgba(255, 165, 0, 0.9))',
+                    border: '3px solid #FFD700',
+                    borderRadius: '16px',
+                    padding: '12px 20px',
+                    color: '#8B4513',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.3)',
+                    animation: 'tooltipBounce 2s ease-in-out infinite',
+                    position: 'relative',
+                    maxWidth: '300px',
+                    textShadow: '1px 1px 2px rgba(139, 69, 19, 0.3)'
+                  }}
+                >
+                  💡 レベル3で特別メッセージ！隠された秘密を発見しよう ✨
+                  {/* 吹き出しの三角形 */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: '-12px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      width: 0,
+                      height: 0,
+                      borderLeft: '12px solid transparent',
+                      borderRight: '12px solid transparent',
+                      borderTop: '12px solid #FFD700'
+                    }}
+                  />
+                </div>
+              </div>
               <h2 className="text-3xl font-bold mb-6" style={{ 
                 color: '#FFD700',
                 textShadow: '2px 2px 4px rgba(0,0,0,0.8)'
@@ -806,8 +848,8 @@ const App: React.FC = () => {
               <div className="max-w-2xl mx-auto space-y-4">
                 <div className="bg-black/50 p-4 rounded-lg border-2 border-gray-500">
                   <h3 className="text-xl font-bold mb-2 text-yellow-300">🎯 <Furigana>遊び方</Furigana></h3>
-                  <p className="mb-2"><Furigana>ねずみ色の石エリア（画面下部）を</Furigana><strong className="text-red-300"><Furigana>右クリック長押</Furigana></strong><Furigana>で採掘できます！</Furigana></p>
-                  <p className="text-sm text-blue-300"><Furigana>右クリックを長押しすると採掘が始まり、掘り終わると石が再生します。</Furigana></p>
+                  <p className="mb-2"><Furigana>ねずみ色の石エリア（画面下部）を</Furigana><strong className="text-red-300"><Furigana>左クリック長押</Furigana></strong><Furigana>で採掘できます！</Furigana></p>
+                  <p className="text-sm text-blue-300"><Furigana>左クリックを長押しすると採掘が始まり、掘り終わると石が再生します。</Furigana></p>
                 </div>
                 
                 <div className="bg-black/50 p-4 rounded-lg border-2 border-gray-500">
@@ -833,6 +875,15 @@ const App: React.FC = () => {
                     <li><Furigana>経験値がいっぱいになるとレベルアップ!</Furigana></li>
                     <li>• <Furigana>そして... レベル5に到達した者だけが読める、秘密のメッセージが隠されているぞ!</Furigana></li>
                   </ul>
+                </div>
+                
+                <div className="bg-purple-900/50 p-3 rounded-lg border-2 border-purple-400 relative">
+                  <div className="absolute -top-2 left-4 bg-purple-400 text-purple-900 px-2 py-1 rounded text-xs font-bold">
+                    💡 ヒント
+                  </div>
+                  <p className="text-sm text-purple-200 mt-2">
+                    <Furigana>特定のレベルに到達すると、特別なおめでとうメッセージが表示されます！隠された秘密を見つけよう...</Furigana> ✨
+                  </p>
                 </div>
               </div>
             </div>
@@ -885,6 +936,15 @@ const App: React.FC = () => {
           50% { transform: translateX(50vw) translateY(0px); }
           75% { transform: translateX(75vw) translateY(-3px); }
           100% { transform: translateX(calc(100vw + 25px)) translateY(0px); }
+        }
+        
+        @keyframes tooltipBounce {
+          0%, 100% { 
+            transform: translateY(0px) scale(1);
+          }
+          50% { 
+            transform: translateY(-5px) scale(1.02);
+          }
         }
       `}</style>
     </div>
