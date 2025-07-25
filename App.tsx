@@ -827,15 +827,11 @@ const App: React.FC = () => {
                 </div>
                 
                 <div className="bg-black/50 p-4 rounded-lg border-2 border-gray-500">
-                  <h3 className="text-xl font-bold mb-2 text-yellow-300">✨ <Furigana>特徴</Furigana></h3>
+                  <h3 className="text-xl font-bold mb-2 text-yellow-300">★<Furigana>このゲームの目標</Furigana></h3>
                   <ul className="text-sm space-y-1 text-left">
-                    <li>• <Furigana>鉱石発見時にエフェクトが表示されます</Furigana></li>
-                    <li>• <Furigana>発掘した鉱石は画面右上のインベントリに保存</Furigana></li>
-                    <li>• <strong className="text-green-300"><Furigana>鉱石を掘ると経験値を獲得できます</Furigana></strong></li>
-                    <li>• <Furigana>経験値バーがいっぱいになるとレベルアップ！</Furigana></li>
-                    <li>• <Furigana>掘った石ブロックは5秒後に自動で再生</Furigana></li>
-                    <li>• <Furigana>レアな鉱石ほど発見確率が低く価値が高い</Furigana></li>
-                    <li>• <strong className="text-yellow-300"><Furigana>宝箱を発見するとクイズが出題され、正解すると100XP！</Furigana></strong></li>
+                    <li>• <Furigana>たくさん採掘して、経験値をためよう!</Furigana></li>
+                    <li><Furigana>経験値がいっぱいになるとレベルアップ!</Furigana></li>
+                    <li>• <Furigana>そして... レベル5に到達した者だけが読める、秘密のメッセージが隠されているぞ!</Furigana></li>
                   </ul>
                 </div>
               </div>
@@ -845,7 +841,7 @@ const App: React.FC = () => {
         
         <footer className="text-center mt-8 text-white drop-shadow-lg">
           <p className="text-lg font-bold bg-black/50 inline-block px-4 py-2 rounded-lg border-2 border-yellow-400/50">
-            &copy; 2025 <Furigana>マイクラ</Furigana>. <Furigana>たのしくあそんで、たくさん学ぼう！</Furigana>
+2025 <Furigana>マイクラ</Furigana>. <Furigana>たのしくあそんで、たくさん学ぼう！</Furigana>
           </p>
         </footer>
       </div>
