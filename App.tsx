@@ -797,6 +797,48 @@ const App: React.FC = () => {
           {activeTab === Tab.Commands && <CommandList commands={MINECRAFT_COMMANDS} categories={COMMAND_CATEGORIES} />}
           {activeTab === Tab.Mining && (
             <div className="text-center p-8 text-white">
+              {/* ヒント吹き出し - マイニングヘッダーの上に表示 */}
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginBottom: '16px'
+                }}
+              >
+                <div
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.95), rgba(255, 165, 0, 0.9))',
+                    border: '3px solid #FFD700',
+                    borderRadius: '16px',
+                    padding: '12px 20px',
+                    color: '#8B4513',
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.3)',
+                    animation: 'tooltipBounce 2s ease-in-out infinite',
+                    position: 'relative',
+                    maxWidth: '300px',
+                    textShadow: '1px 1px 2px rgba(139, 69, 19, 0.3)'
+                  }}
+                >
+                  💡 レベル3で特別メッセージ！隠された秘密を発見しよう ✨
+                  {/* 吹き出しの三角形 */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: '-12px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      width: 0,
+                      height: 0,
+                      borderLeft: '12px solid transparent',
+                      borderRight: '12px solid transparent',
+                      borderTop: '12px solid #FFD700'
+                    }}
+                  />
+                </div>
+              </div>
               <h2 className="text-3xl font-bold mb-6" style={{ 
                 color: '#FFD700',
                 textShadow: '2px 2px 4px rgba(0,0,0,0.8)'
@@ -894,6 +936,15 @@ const App: React.FC = () => {
           50% { transform: translateX(50vw) translateY(0px); }
           75% { transform: translateX(75vw) translateY(-3px); }
           100% { transform: translateX(calc(100vw + 25px)) translateY(0px); }
+        }
+        
+        @keyframes tooltipBounce {
+          0%, 100% { 
+            transform: translateY(0px) scale(1);
+          }
+          50% { 
+            transform: translateY(-5px) scale(1.02);
+          }
         }
       `}</style>
     </div>

@@ -317,51 +317,6 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
 
   return (
     <div className={className}>
-      {/* ヒント吹き出し - 採掘エリアの上に表示 */}
-      <div
-        style={{
-          position: 'fixed',
-          top: `${MINING_CONFIG.STONE_AREA_TOP - 8}vh`,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 15,
-          pointerEvents: 'none'
-        }}
-      >
-        <div
-          style={{
-            background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.95), rgba(255, 165, 0, 0.9))',
-            border: '3px solid #FFD700',
-            borderRadius: '16px',
-            padding: '12px 20px',
-            color: '#8B4513',
-            fontSize: '14px',
-            fontWeight: 'bold',
-            textAlign: 'center',
-            boxShadow: '0 8px 24px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.3)',
-            animation: 'tooltipBounce 2s ease-in-out infinite',
-            position: 'relative',
-            maxWidth: '300px',
-            textShadow: '1px 1px 2px rgba(139, 69, 19, 0.3)'
-          }}
-        >
-          💡 レベル3で特別メッセージ！隠された秘密を発見しよう ✨
-          {/* 吹き出しの三角形 */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '-12px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: 0,
-              height: 0,
-              borderLeft: '12px solid transparent',
-              borderRight: '12px solid transparent',
-              borderTop: '12px solid #FFD700'
-            }}
-          />
-        </div>
-      </div>
 
       {/* 採掘エリア */}
       <div
@@ -570,15 +525,6 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
           .hover\\:bg-gray-400\\/30:hover {
             background-color: rgba(156, 163, 175, 0.3) !important;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
-          }
-          
-          @keyframes tooltipBounce {
-            0%, 100% { 
-              transform: translateX(-50%) translateY(0px) scale(1);
-            }
-            50% { 
-              transform: translateX(-50%) translateY(-5px) scale(1.02);
-            }
           }
         `}
       </style>
