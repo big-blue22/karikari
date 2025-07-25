@@ -40,8 +40,8 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
           />
         </div>
 
-        {/* タイトル - 完全中央配置 */}
-        <div className="text-center py-4">
+        {/* タイトル - 完全中央配置（モバイルでロゴ分の左余白を追加） */}
+        <div className="text-center py-4 pl-20 sm:pl-0">
           <h1 
             className="text-xl sm:text-4xl md:text-5xl font-bold tracking-wider"
             style={{
