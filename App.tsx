@@ -797,12 +797,12 @@ const App: React.FC = () => {
           {activeTab === Tab.Commands && <CommandList commands={MINECRAFT_COMMANDS} categories={COMMAND_CATEGORIES} />}
           {activeTab === Tab.Mining && (
             <div className="text-center p-8 text-white">
-              {/* ヒント吹き出し - マイニングヘッダーの上に表示 */}
+              {/* ヒント吹き出し - マイニングタイトルの直上に表示 */}
               <div
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
-                  marginBottom: '16px'
+                  marginBottom: '8px'
                 }}
               >
                 <div
