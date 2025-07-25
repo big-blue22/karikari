@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ activeTab, onTabChange }) => {
         </div>
       </div>
       
-      <nav className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-1 sm:gap-4">
+      <nav className="mt-4 sm:mt-6 flex justify-center gap-2 sm:gap-4">
         <TabButton
           onClick={() => onTabChange(Tab.Keyboard)}
           isActive={activeTab === Tab.Keyboard}

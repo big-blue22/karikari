@@ -31,7 +31,12 @@ const KeyboardLayout: React.FC = () => {
         <p className="mt-2 text-gray-300 text-xs sm:text-sm">
           <Furigana>画像をタップすると拡大できます</Furigana>
         </p>
-
+        <p className="mt-4 text-orange-300 text-lg font-bold">
+          <Furigana>ここにキーボードの画像が入ります</Furigana>
+        </p>
+        <p className="text-gray-400 text-sm sm:text-base mt-1">
+          <Furigana>(先生へ：この画像を実際のキーボード表に差替えてください)</Furigana>
+        </p>
       </div>
 
       {/* Modal for enlarged image */}
