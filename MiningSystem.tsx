@@ -237,9 +237,9 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
     }
   }, [miningState.isMinning, miningState.startTime, completeMining]);
 
-  // 右クリック開始
+  // 左クリック開始
   const handleMouseDown = useCallback((e: React.MouseEvent, area: MiningArea) => {
-    if (e.button !== 2) return; // 右クリックのみ
+    if (e.button !== 0) return; // 左クリックのみ
     if (!area.isRegenerated || miningState.isMinning) return;
     
     e.preventDefault();
@@ -256,7 +256,7 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
     }, 100); // 100ms後に採掘開始
   }, [miningState.isMinning]);
 
-  // 右クリック終了
+  // 左クリック終了
   const handleMouseUp = useCallback(() => {
     if (longPressRef.current) {
       clearTimeout(longPressRef.current);

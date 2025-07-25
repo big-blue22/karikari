@@ -85,13 +85,54 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
           style={{
             fontSize: '16px',
             color: '#E0E0E0',
-            marginBottom: popup.newLevel === 5 ? '16px' : '24px',
+            marginBottom: popup.newLevel === 3 || popup.newLevel === 5 ? '16px' : '24px',
             lineHeight: '1.5'
           }}
         >
           おめでとうございます！<br />
           採掘スキルが向上しました！
         </p>
+
+        {/* Secret Message for Level 3 */}
+        {popup.newLevel === 3 && (
+          <div 
+            style={{
+              background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.1))',
+              border: '2px solid #FFD700',
+              borderRadius: '8px',
+              padding: '16px',
+              marginBottom: '24px',
+              animation: 'secretGlow 2s ease-in-out infinite alternate'
+            }}
+          >
+            <div 
+              style={{
+                fontSize: '20px',
+                fontWeight: 'bold',
+                color: '#FFD700',
+                textShadow: '2px 2px 4px rgba(0,0,0,0.8)',
+                marginBottom: '8px'
+              }}
+            >
+              🌟 おめでとうメッセージ 🌟
+            </div>
+            <p 
+              style={{
+                fontSize: '14px',
+                color: '#FFF8DC',
+                textShadow: '1px 1px 2px rgba(0,0,0,0.8)',
+                lineHeight: '1.4'
+              }}
+            >
+              おめでとうございます！<br />
+              レベル3に到達しました！<br />
+              採掘の基本をマスターしつつあります。<br />
+              <span style={{ color: '#FFD700', fontWeight: 'bold' }}>
+                この調子で頑張って！
+              </span>
+            </p>
+          </div>
+        )}
 
         {/* Secret Message for Level 5 */}
         {popup.newLevel === 5 && (

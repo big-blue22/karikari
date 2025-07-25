@@ -806,8 +806,8 @@ const App: React.FC = () => {
               <div className="max-w-2xl mx-auto space-y-4">
                 <div className="bg-black/50 p-4 rounded-lg border-2 border-gray-500">
                   <h3 className="text-xl font-bold mb-2 text-yellow-300">🎯 <Furigana>遊び方</Furigana></h3>
-                  <p className="mb-2"><Furigana>ねずみ色の石エリア（画面下部）を</Furigana><strong className="text-red-300"><Furigana>右クリック長押</Furigana></strong><Furigana>で採掘できます！</Furigana></p>
-                  <p className="text-sm text-blue-300"><Furigana>右クリックを長押しすると採掘が始まり、掘り終わると石が再生します。</Furigana></p>
+                  <p className="mb-2"><Furigana>ねずみ色の石エリア（画面下部）を</Furigana><strong className="text-red-300"><Furigana>左クリック長押</Furigana></strong><Furigana>で採掘できます！</Furigana></p>
+                  <p className="text-sm text-blue-300"><Furigana>左クリックを長押しすると採掘が始まり、掘り終わると石が再生します。</Furigana></p>
                 </div>
                 
                 <div className="bg-black/50 p-4 rounded-lg border-2 border-gray-500">
@@ -833,6 +833,15 @@ const App: React.FC = () => {
                     <li><Furigana>経験値がいっぱいになるとレベルアップ!</Furigana></li>
                     <li>• <Furigana>そして... レベル5に到達した者だけが読める、秘密のメッセージが隠されているぞ!</Furigana></li>
                   </ul>
+                </div>
+                
+                <div className="bg-purple-900/50 p-3 rounded-lg border-2 border-purple-400 relative">
+                  <div className="absolute -top-2 left-4 bg-purple-400 text-purple-900 px-2 py-1 rounded text-xs font-bold">
+                    💡 ヒント
+                  </div>
+                  <p className="text-sm text-purple-200 mt-2">
+                    <Furigana>特定のレベルに到達すると、特別なおめでとうメッセージが表示されます！隠された秘密を見つけよう...</Furigana> ✨
+                  </p>
                 </div>
               </div>
             </div>
