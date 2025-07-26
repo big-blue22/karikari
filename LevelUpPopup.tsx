@@ -114,6 +114,7 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
               width: '80px',
               height: '80px',
               objectFit: 'cover',
+              objectPosition: 'top',
               borderRadius: '8px',
               border: '2px solid #FFD700',
               boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
