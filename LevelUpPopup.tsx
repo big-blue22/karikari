@@ -38,7 +38,7 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
           boxShadow: '0 16px 48px rgba(0,0,0,0.7), inset 0 4px 8px rgba(255,255,255,0.1)',
           animation: 'levelUpBounce 0.6s ease-out',
           backdropFilter: 'blur(8px)',
-          maxWidth: '400px',
+          maxWidth: '450px',
           margin: '20px'
         }}
         onClick={(e) => e.stopPropagation()}
@@ -86,15 +86,67 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
           style={{
             fontSize: '16px',
             color: '#E0E0E0',
-            marginBottom: popup.newLevel === 3 ? '16px' : '24px',
+            marginBottom: '16px',
             lineHeight: '1.5'
           }}
         >
-          おめでとうございます！<br />
-          採掘スキルが向上しました！
+          山崎たくみくんの黒歴史！！<br />
+          <br />
+          なんと…校長室で寝たことがある！！！<br />
+          <br />
+          みんなはあるかな？笑
         </p>
 
-
+        {/* Images Gallery */}
+        <div 
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '8px',
+            marginBottom: popup.newLevel === 3 ? '16px' : '24px',
+            flexWrap: 'wrap'
+          }}
+        >
+          <img 
+            src="/社長こぽ.jpg" 
+            alt="社長こぽ"
+            style={{
+              width: '80px',
+              height: '80px',
+              objectFit: 'cover',
+              borderRadius: '8px',
+              border: '2px solid #FFD700',
+              boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+              animation: 'imageFloat1 3s ease-in-out infinite alternate'
+            }}
+          />
+          <img 
+            src="/社長ネル.jpg" 
+            alt="社長ネル"
+            style={{
+              width: '80px',
+              height: '80px',
+              objectFit: 'cover',
+              borderRadius: '8px',
+              border: '2px solid #FFD700',
+              boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+              animation: 'imageFloat2 3s ease-in-out infinite alternate'
+            }}
+          />
+          <img 
+            src="/社長撮影禁止.jpg" 
+            alt="社長撮影禁止"
+            style={{
+              width: '80px',
+              height: '80px',
+              objectFit: 'cover',
+              borderRadius: '8px',
+              border: '2px solid #FFD700',
+              boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+              animation: 'imageFloat3 3s ease-in-out infinite alternate'
+            }}
+          />
+        </div>
 
         {/* Secret Message for Level 3 */}
         {popup.newLevel === 3 && (
@@ -241,6 +293,33 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
             100% { 
               opacity: 1;
               transform: scale(1) translateY(0);
+            }
+          }
+          
+          @keyframes imageFloat1 {
+            0% { 
+              transform: translateY(0px) rotate(-2deg);
+            }
+            100% { 
+              transform: translateY(-8px) rotate(2deg);
+            }
+          }
+          
+          @keyframes imageFloat2 {
+            0% { 
+              transform: translateY(-3px) rotate(1deg);
+            }
+            100% { 
+              transform: translateY(-10px) rotate(-1deg);
+            }
+          }
+          
+          @keyframes imageFloat3 {
+            0% { 
+              transform: translateY(-5px) rotate(-1deg);
+            }
+            100% { 
+              transform: translateY(-12px) rotate(1deg);
             }
           }
         `}
