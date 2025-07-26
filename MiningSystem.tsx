@@ -190,11 +190,10 @@ const MiningSystem: React.FC<MiningSystemProps> = ({ className }) => {
 
   // ポップアップを手動で閉じる
   const closeLevelUpPopup = useCallback(() => {
-    setLevelUpPopup({
-      isVisible: false,
-      newLevel: 1,
-      timestamp: 0
-    });
+    setLevelUpPopup(prev => ({
+      ...prev,
+      isVisible: false
+    }));
   }, []);
 
   // クイズを閉じる

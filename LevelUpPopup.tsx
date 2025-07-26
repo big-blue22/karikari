@@ -82,72 +82,88 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
         </p>
 
         {/* Congratulations Message */}
-        <p 
-          style={{
-            fontSize: '16px',
-            color: '#E0E0E0',
-            marginBottom: '16px',
-            lineHeight: '1.5'
-          }}
-        >
-          山崎たくみくんの黒歴史！！<br />
-          <br />
-          なんと…校長室で寝たことがある！！！<br />
-          <br />
-          みんなはあるかな？笑
-        </p>
+        {popup.newLevel >= 3 ? (
+          <>
+            <p 
+              style={{
+                fontSize: '16px',
+                color: '#E0E0E0',
+                marginBottom: '16px',
+                lineHeight: '1.5'
+              }}
+            >
+              山崎たくみくんの黒歴史！！<br />
+              <br />
+              なんと…校長室で寝たことがある！！！<br />
+              <br />
+              みんなはあるかな？笑
+            </p>
 
-        {/* Images Gallery */}
-        <div 
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '12px',
-            marginBottom: popup.newLevel === 3 ? '16px' : '24px',
-            flexWrap: 'wrap'
-          }}
-        >
-          <img 
-            src="/社長こぽ.jpg" 
-            alt="社長こぽ"
+            {/* Images Gallery */}
+            <div 
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '12px',
+                marginBottom: popup.newLevel === 3 ? '16px' : '24px',
+                flexWrap: 'wrap'
+              }}
+            >
+              <img 
+                src="/社長こぽ.jpg" 
+                alt="社長こぽ"
+                style={{
+                  width: '120px',
+                  height: '120px',
+                  objectFit: 'cover',
+                  objectPosition: 'top',
+                  borderRadius: '8px',
+                  border: '2px solid #FFD700',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                  animation: 'imageFloat1 3s ease-in-out infinite alternate'
+                }}
+              />
+              <img 
+                src="/社長ネル.jpg" 
+                alt="社長ネル"
+                style={{
+                  width: '120px',
+                  height: '120px',
+                  objectFit: 'cover',
+                  borderRadius: '8px',
+                  border: '2px solid #FFD700',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                  animation: 'imageFloat2 3s ease-in-out infinite alternate'
+                }}
+              />
+              <img 
+                src="/社長撮影禁止.jpg" 
+                alt="社長撮影禁止"
+                style={{
+                  width: '120px',
+                  height: '120px',
+                  objectFit: 'cover',
+                  borderRadius: '8px',
+                  border: '2px solid #FFD700',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                  animation: 'imageFloat3 3s ease-in-out infinite alternate'
+                }}
+              />
+            </div>
+          </>
+        ) : (
+          <p 
             style={{
-              width: '120px',
-              height: '120px',
-              objectFit: 'cover',
-              objectPosition: 'top',
-              borderRadius: '8px',
-              border: '2px solid #FFD700',
-              boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
-              animation: 'imageFloat1 3s ease-in-out infinite alternate'
+              fontSize: '16px',
+              color: '#E0E0E0',
+              marginBottom: popup.newLevel === 3 ? '16px' : '24px',
+              lineHeight: '1.5'
             }}
-          />
-          <img 
-            src="/社長ネル.jpg" 
-            alt="社長ネル"
-            style={{
-              width: '120px',
-              height: '120px',
-              objectFit: 'cover',
-              borderRadius: '8px',
-              border: '2px solid #FFD700',
-              boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
-              animation: 'imageFloat2 3s ease-in-out infinite alternate'
-            }}
-          />
-          <img 
-            src="/社長撮影禁止.jpg" 
-            alt="社長撮影禁止"
-            style={{
-              width: '120px',
-              height: '120px',
-              objectFit: 'cover',
-              borderRadius: '8px',
-              border: '2px solid #FFD700',
-              boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
-              animation: 'imageFloat3 3s ease-in-out infinite alternate'
-            }}
-          />
-        </div>
+          >
+            おめでとうございます！<br />
+            採掘スキルが向上しました！
+          </p>
+        )}
 
         {/* Secret Message for Level 3 */}
         {popup.newLevel === 3 && (
