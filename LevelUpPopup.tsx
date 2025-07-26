@@ -38,7 +38,7 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
           boxShadow: '0 16px 48px rgba(0,0,0,0.7), inset 0 4px 8px rgba(255,255,255,0.1)',
           animation: 'levelUpBounce 0.6s ease-out',
           backdropFilter: 'blur(8px)',
-          maxWidth: '450px',
+          maxWidth: '550px',
           margin: '20px'
         }}
         onClick={(e) => e.stopPropagation()}
@@ -102,7 +102,7 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
           style={{
             display: 'flex',
             justifyContent: 'center',
-            gap: '8px',
+            gap: '12px',
             marginBottom: popup.newLevel === 3 ? '16px' : '24px',
             flexWrap: 'wrap'
           }}
@@ -111,8 +111,8 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
             src="/社長こぽ.jpg" 
             alt="社長こぽ"
             style={{
-              width: '80px',
-              height: '80px',
+              width: '120px',
+              height: '120px',
               objectFit: 'cover',
               objectPosition: 'top',
               borderRadius: '8px',
@@ -125,8 +125,8 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
             src="/社長ネル.jpg" 
             alt="社長ネル"
             style={{
-              width: '80px',
-              height: '80px',
+              width: '120px',
+              height: '120px',
               objectFit: 'cover',
               borderRadius: '8px',
               border: '2px solid #FFD700',
@@ -138,8 +138,8 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
             src="/社長撮影禁止.jpg" 
             alt="社長撮影禁止"
             style={{
-              width: '80px',
-              height: '80px',
+              width: '120px',
+              height: '120px',
               objectFit: 'cover',
               borderRadius: '8px',
               border: '2px solid #FFD700',
