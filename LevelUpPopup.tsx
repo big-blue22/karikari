@@ -95,7 +95,7 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
               }}
             >
               <img 
-                src="/社長こぽ.jpg" 
+                src="./社長こぽ.jpg" 
                 alt="社長こぽ"
                 style={{
                   width: '120px',
@@ -109,7 +109,7 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
                 }}
               />
               <img 
-                src="/社長ネル.jpg" 
+                src="./社長ネル.jpg" 
                 alt="社長ネル"
                 style={{
                   width: '120px',
@@ -122,7 +122,7 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
                 }}
               />
               <img 
-                src="/社長撮影禁止.jpg" 
+                src="./社長撮影禁止.jpg" 
                 alt="社長撮影禁止"
                 style={{
                   width: '120px',
