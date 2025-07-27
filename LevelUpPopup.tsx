@@ -196,12 +196,11 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
                 lineHeight: '1.4'
               }}
             >
-              君はついにレベル3に到達した！<br />
-              真の冒険者として認められた証だ。<br />
-              これからも探索を続け、新たな発見を求めよう！<br />
-              <span style={{ color: '#FFD700', fontWeight: 'bold' }}>
-                ～ マインクラフトの世界より ～
-              </span>
+              山崎たくみくんの黒歴史！！<br />
+              <br />
+              なんと…校長室で寝たことがある！！！<br />
+              <br />
+              みんなはあるかな？笑
             </p>
           </div>
         )}
