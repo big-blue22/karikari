@@ -84,21 +84,6 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
         {/* Congratulations Message */}
         {popup.newLevel >= 3 ? (
           <>
-            <p 
-              style={{
-                fontSize: '16px',
-                color: '#E0E0E0',
-                marginBottom: '16px',
-                lineHeight: '1.5'
-              }}
-            >
-              山崎たくみくんの黒歴史！！<br />
-              <br />
-              なんと…校長室で寝たことがある！！！<br />
-              <br />
-              みんなはあるかな？笑
-            </p>
-
             {/* Images Gallery */}
             <div 
               style={{

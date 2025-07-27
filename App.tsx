@@ -876,15 +876,6 @@ const App: React.FC = () => {
                     <li>• <Furigana>そして... レベル3に到達した者だけが読める、秘密のメッセージが隠されているぞ!</Furigana></li>
                   </ul>
                 </div>
-                
-                <div className="bg-purple-900/50 p-3 rounded-lg border-2 border-purple-400 relative">
-                  <div className="absolute -top-2 left-4 bg-purple-400 text-purple-900 px-2 py-1 rounded text-xs font-bold">
-                    💡 ヒント
-                  </div>
-                  <p className="text-sm text-purple-200 mt-2">
-                    <Furigana>特定のレベルに到達すると、特別なおめでとうメッセージが表示されます！隠された秘密を見つけよう...</Furigana> ✨
-                  </p>
-                </div>
               </div>
             </div>
           )}
