@@ -38,7 +38,7 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
           boxShadow: '0 16px 48px rgba(0,0,0,0.7), inset 0 4px 8px rgba(255,255,255,0.1)',
           animation: 'levelUpBounce 0.6s ease-out',
           backdropFilter: 'blur(8px)',
-          maxWidth: '400px',
+          maxWidth: '550px',
           margin: '20px'
         }}
         onClick={(e) => e.stopPropagation()}
@@ -82,19 +82,73 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
         </p>
 
         {/* Congratulations Message */}
-        <p 
-          style={{
-            fontSize: '16px',
-            color: '#E0E0E0',
-            marginBottom: popup.newLevel === 3 ? '16px' : '24px',
-            lineHeight: '1.5'
-          }}
-        >
-          おめでとうございます！<br />
-          採掘スキルが向上しました！
-        </p>
-
-
+        {popup.newLevel >= 3 ? (
+          <>
+            {/* Images Gallery */}
+            <div 
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '12px',
+                marginBottom: popup.newLevel === 3 ? '16px' : '24px',
+                flexWrap: 'wrap'
+              }}
+            >
+              <img 
+                src="/社長こぽ.jpg" 
+                alt="社長こぽ"
+                style={{
+                  width: '120px',
+                  height: '120px',
+                  objectFit: 'cover',
+                  objectPosition: 'top',
+                  borderRadius: '8px',
+                  border: '2px solid #FFD700',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                  animation: 'imageFloat1 3s ease-in-out infinite alternate'
+                }}
+              />
+              <img 
+                src="/社長ネル.jpg" 
+                alt="社長ネル"
+                style={{
+                  width: '120px',
+                  height: '120px',
+                  objectFit: 'cover',
+                  borderRadius: '8px',
+                  border: '2px solid #FFD700',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                  animation: 'imageFloat2 3s ease-in-out infinite alternate'
+                }}
+              />
+              <img 
+                src="/社長撮影禁止.jpg" 
+                alt="社長撮影禁止"
+                style={{
+                  width: '120px',
+                  height: '120px',
+                  objectFit: 'cover',
+                  borderRadius: '8px',
+                  border: '2px solid #FFD700',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.3)',
+                  animation: 'imageFloat3 3s ease-in-out infinite alternate'
+                }}
+              />
+            </div>
+          </>
+        ) : (
+          <p 
+            style={{
+              fontSize: '16px',
+              color: '#E0E0E0',
+              marginBottom: popup.newLevel === 3 ? '16px' : '24px',
+              lineHeight: '1.5'
+            }}
+          >
+            おめでとうございます！<br />
+            採掘スキルが向上しました！
+          </p>
+        )}
 
         {/* Secret Message for Level 3 */}
         {popup.newLevel === 3 && (
@@ -127,12 +181,11 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
                 lineHeight: '1.4'
               }}
             >
-              君はついにレベル3に到達した！<br />
-              真の冒険者として認められた証だ。<br />
-              これからも探索を続け、新たな発見を求めよう！<br />
-              <span style={{ color: '#FFD700', fontWeight: 'bold' }}>
-                ～ マインクラフトの世界より ～
-              </span>
+              山崎たくみくんの黒歴史！！<br />
+              <br />
+              なんと…校長室で寝たことがある！！！<br />
+              <br />
+              みんなはあるかな？笑
             </p>
           </div>
         )}
@@ -241,6 +294,33 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
             100% { 
               opacity: 1;
               transform: scale(1) translateY(0);
+            }
+          }
+          
+          @keyframes imageFloat1 {
+            0% { 
+              transform: translateY(0px) rotate(-2deg);
+            }
+            100% { 
+              transform: translateY(-8px) rotate(2deg);
+            }
+          }
+          
+          @keyframes imageFloat2 {
+            0% { 
+              transform: translateY(-3px) rotate(1deg);
+            }
+            100% { 
+              transform: translateY(-10px) rotate(-1deg);
+            }
+          }
+          
+          @keyframes imageFloat3 {
+            0% { 
+              transform: translateY(-5px) rotate(-1deg);
+            }
+            100% { 
+              transform: translateY(-12px) rotate(1deg);
             }
           }
         `}
