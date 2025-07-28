@@ -181,7 +181,7 @@ const LevelUpPopupComponent: React.FC<LevelUpPopupProps> = ({ popup, onClose }) 
                 lineHeight: '1.4'
               }}
             >
-              山崎たくみくんの黒歴史！！<br />
+              山﨑たくみくんの黒歴史！！<br />
               <br />
               なんと…校長室で寝たことがある！！！<br />
               <br />
